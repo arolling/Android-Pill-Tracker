@@ -36,14 +36,11 @@ public class MainActivity extends AppCompatActivity {
 
         mNavChoices = getResources().getStringArray(R.array.nav_choices);
         mTitle = mDrawerTitle = getTitle();
-        Log.d(TAG, "mTitle: " + mTitle);
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+        mDrawerList.setAdapter(new ArrayAdapter<>(this,
                 R.layout.drawer_list_item, mNavChoices));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         setupDrawer(mTitle);
-
-
 
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.addDrawerListener(mDrawerToggle);
