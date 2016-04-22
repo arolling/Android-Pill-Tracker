@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Pill Tracker</string>
+    <string-array name="nav_choices">
+        <item>Home</item>
+        <item>Setup New Medication</item>
+        <item>My Medications</item>
+        <item>For My Doctor</item>
+        <item>Update Refills</item>
+        <item>Find Pharmacies</item>
+    </string-array>
 </resources>
