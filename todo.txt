@@ -1,0 +1,36 @@
+1) Main/welcome activity - new user signup process?
+  a) already established user - meds closest to running out first
+  b) new user - my doctor's details, my pharmacy's details?
+2) drawer navigation bar
+  a) see my meds
+  b) medical professional view?
+  c) find nearby pharmacies
+  d) add refill info
+  e) add new med/change info
+3) Setup for each med - user input info:
+  a) name - brand & generic
+  b) strength per pill
+  c) sig (qty & freq & duration)
+  d) appearance of pill
+  e) Why do I take this?
+  f) general pharmaceutical category - from fda api?
+  g) date started taking it
+  e) current rx - qty, refills remaining, onhand when rx filled
+4) View for each med
+  a) How many should be remaining
+  b) user reminder preference *** can we add notifications?
+  c) usage history
+  d) user input concerns/side effects/questions for medical professional
+  e) user input note as discontinued
+5) Medical professional view
+  a) medication name, dose, sig, date started
+  b) compliance history - general or specific?
+  c) user input questions
+  d) why the user believes she is taking this
+6) Add refill info view
+  a) spinner to choose med
+  b) input field for date, qty, new rx boolean
+  c) when user notes she has used last refill, reminder to call doctor's office for appt?
+7) Find nearby pharmacies
+  a) use geolocation data & google maps
+  b) driving directions to user's preferred pharmacy?
