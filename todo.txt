@@ -1,7 +1,7 @@
 1) Main/welcome activity - new user signup process?
   a) already established user - meds closest to running out first
   b) new user - my doctor's details, my pharmacy's details?
-2) drawer navigation bar
+2) drawer navigation bar ✓
   a) see my meds
   b) medical professional view?
   c) find nearby pharmacies

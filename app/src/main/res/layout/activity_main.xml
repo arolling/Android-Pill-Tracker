@@ -31,6 +31,18 @@
             android:textStyle="bold"
             android:textSize="40sp"
             android:textColor="@color/colorAccent" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New User?"
+            android:id="@+id/newUserButton"
+            android:layout_marginTop="133dp"
+            android:textColor="@color/colorIcons"
+            android:background="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:layout_below="@+id/tvAppTitle"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
     <!-- The navigation drawer -->
     <ListView android:id="@+id/navigation_drawer"
