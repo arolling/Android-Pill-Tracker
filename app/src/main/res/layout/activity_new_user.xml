@@ -90,8 +90,6 @@
         android:id="@+id/addMedicationsButton"
         android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
-        android:layout_row="8"
-        android:layout_column="0"
         android:layout_alignParentBottom="true"
         android:background="@color/colorAccent"
         android:textColor="@color/colorIcons" />

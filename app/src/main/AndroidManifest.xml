@@ -20,6 +20,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.pilltracker.MainActivity" />
         </activity>
+        <activity android:name=".NewMedicationActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.epicodus.pilltracker.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
