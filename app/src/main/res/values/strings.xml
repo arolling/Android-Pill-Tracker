@@ -12,4 +12,5 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="welcome_new_user">"Welcome to Pill Tracker! This is a tool for you to use to track your medication refills and usage. You can see how closely you are following the prescribed dosing and get reminders for prescriptions due for a refill.\n\nFirst, we need some information."</string>
 </resources>

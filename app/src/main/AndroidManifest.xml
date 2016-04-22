@@ -15,7 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewUserActivity"></activity>
+        <activity android:name=".NewUserActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.epicodus.pilltracker.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
