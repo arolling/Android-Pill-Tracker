@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -31,6 +33,18 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if (v == mAddMedsButton) {
             Intent intent = new Intent(NewUserActivity.this, NewMedicationActivity.class);
+            String userName = mUserName.getText().toString();
+            String doctorName = mDoctorName.getText().toString();
+            String doctorAddress = mDoctorAddress.getText().toString();
+            String pharmacyName = mPharmacyName.getText().toString();
+            String pharmacyAddress = mPharmacyAddress.getText().toString();
+            ArrayList<String> userInfo = new ArrayList<>();
+            userInfo.add(userName);
+            userInfo.add(doctorName);
+            userInfo.add(doctorAddress);
+            userInfo.add(pharmacyName);
+            userInfo.add(pharmacyAddress);
+            intent.putStringArrayListExtra("userInfo", userInfo);
             startActivity(intent);
         }
     }

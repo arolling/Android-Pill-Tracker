@@ -37,17 +37,17 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Your Name"
             android:ems="10"
             android:id="@+id/etUserName"
             android:layout_row="0"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:hint="Your Nam" />
 
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Your Doctor&apos;s Name"
+            android:hint="Your Doctor&apos;s Name"
             android:ems="10"
             android:id="@+id/etDoctorName"
             android:layout_row="1"
@@ -59,7 +59,7 @@
             android:id="@+id/etPharmacyName"
             android:layout_row="2"
             android:layout_column="0"
-            android:text="Your Preferred Pharmacy" />
+            android:hint="Your Preferred Pharmacy" />
 
         <EditText
             android:layout_width="189dp"
@@ -69,7 +69,7 @@
             android:id="@+id/etDoctorAddress"
             android:layout_row="1"
             android:layout_column="1"
-            android:text="Your Doctor&apos;s Address" />
+            android:hint="Your Doctor&apos;s Address" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
             android:id="@+id/etPharmacyAddress"
             android:layout_row="2"
             android:layout_column="1"
-            android:text="Your Preferred Pharmacy&apos;s Address" />
+            android:hint="Your Preferred Pharmacy&apos;s Address" />
 
     </GridLayout>
 
