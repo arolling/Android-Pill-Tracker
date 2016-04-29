@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -25,6 +26,7 @@ import okhttp3.Response;
 public class NewMedicationActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = NewMedicationActivity.class.getSimpleName();
     private ArrayList<String> mUserInfo = new ArrayList<>();
+    private ArrayList<String> mNameSuggestions = new ArrayList<>();
     @Bind(R.id.drugSearchButton) Button mDrugSearchButton;
     @Bind(R.id.drugConfirmButton) Button mDrugConfirmButton;
     @Bind(R.id.addDrugButton) Button mAddDrugButton;
@@ -34,6 +36,7 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
     @Bind(R.id.brandGenericSwitch) Switch mBrandGenericSwitch;
     @Bind(R.id.indicationEditText) EditText mIndicationEditText;
     @Bind(R.id.sigEditText) EditText mSigEditText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,23 +71,26 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
     }
 
     private void getRestaurants(String search) {
-        DrugService drugService = new DrugService();
-        drugService.findDrugs(search, new Callback() {
+        final DrugService drugService = new DrugService();
+        drugService.autocompleteDrugs(search, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String jsonData = response.body().string();
-                    if (response.isSuccessful()) {
-                        Log.v(TAG, jsonData);
+            public void onResponse(Call call, Response response) {
+                mNameSuggestions = drugService.processAutocomplete(response);
+                NewMedicationActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ArrayAdapter adapter = new ArrayAdapter(NewMedicationActivity.this,
+                                android.R.layout.simple_spinner_item, mNameSuggestions);
+
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        mConfirmDrugSpinner.setAdapter(adapter);
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                });
             }
         });
     }
