@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -27,6 +28,8 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
     public static final String TAG = NewMedicationActivity.class.getSimpleName();
     private ArrayList<String> mUserInfo = new ArrayList<>();
     private ArrayList<String> mNameSuggestions = new ArrayList<>();
+    private ArrayList<String> mIngredients = new ArrayList<>();
+    private boolean mBrand = false;
     @Bind(R.id.drugSearchButton) Button mDrugSearchButton;
     @Bind(R.id.drugConfirmButton) Button mDrugConfirmButton;
     @Bind(R.id.addDrugButton) Button mAddDrugButton;
@@ -48,7 +51,18 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
         mUserInfo = intent.getStringArrayListExtra("userInfo");
         Log.v(TAG, "User info: " + android.text.TextUtils.join(", ", mUserInfo));
 
+        mBrandGenericSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mBrand = true;
+                } else {
+                    mBrand = false;
+                }
+            }
+        });
+
         mDrugSearchButton.setOnClickListener(this);
+        mDrugConfirmButton.setOnClickListener(this);
     }
 
     @Override
@@ -56,10 +70,14 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
         switch(v.getId()){
             case R.id.drugSearchButton:
                 String search = mDrugNameSearch.getText().toString();
-                getRestaurants(search);
-                //make api call & show list of possible drugs
+                getMatches(search);
                 break;
             case R.id.drugConfirmButton:
+                Log.v(TAG, "Brand: " + mBrand);
+                if(mBrand){
+                    String medication = mConfirmDrugSpinner.getSelectedItem().toString();
+                    getActiveIngredients(medication);
+                }
                 // read switch for generic/brand, set generic/brand name (with api call if nec), receive drug strengths and populate spinner
                 break;
             case R.id.addDrugButton:
@@ -70,7 +88,7 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void getRestaurants(String search) {
+    private void getMatches(String search) {
         final DrugService drugService = new DrugService();
         drugService.autocompleteDrugs(search, new Callback() {
             @Override
@@ -84,15 +102,30 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
                 NewMedicationActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ArrayAdapter adapter = new ArrayAdapter(NewMedicationActivity.this,
-                                android.R.layout.simple_spinner_item, mNameSuggestions);
-
+                        ArrayAdapter adapter = new ArrayAdapter(NewMedicationActivity.this, android.R.layout.simple_spinner_item, mNameSuggestions);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         mConfirmDrugSpinner.setAdapter(adapter);
                     }
                 });
             }
         });
+    }
+
+    private void getActiveIngredients(String drugName){
+        final DrugService drugService = new DrugService();
+        drugService.findIngredients(drugName, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response){
+                mIngredients = drugService.processIngredients(response);
+                Log.v(TAG, android.text.TextUtils.join(", ", mIngredients));
+            }
+        });
+
     }
 }
 

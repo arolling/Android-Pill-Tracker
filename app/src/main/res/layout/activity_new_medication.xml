@@ -77,6 +77,7 @@
                 android:layout_below="@+id/drugNameEditText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_marginRight="10dp"
                 android:layout_alignRight="@+id/drugNameEditText"
                 android:layout_alignEnd="@+id/drugNameEditText" />
 

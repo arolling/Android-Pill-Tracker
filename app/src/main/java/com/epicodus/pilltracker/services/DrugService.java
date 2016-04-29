@@ -54,12 +54,47 @@ public class DrugService {
                     possibleDrugs.add(drugName);
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (JSONException j) {
+            j.printStackTrace();
         }
         return possibleDrugs;
+    }
+
+    public void findIngredients(String brand, Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(MAPI_API_BASE_URL).newBuilder();
+        urlBuilder.addPathSegment(brand);
+        urlBuilder.addPathSegment(MAPI_SUBSTANCES_SEARCH);
+
+        String url = urlBuilder.build().toString();
+
+        Request request = new Request.Builder().url(url).build();
+        Log.v(TAG, "substances url: " + request);
+
+        Call call = client.newCall(request);
+        call.enqueue(callback);
+    }
+
+    public ArrayList<String> processIngredients(Response response){
+        ArrayList<String> ingredients = new ArrayList<>();
+        try{
+            String jsonData = response.body().string();
+            if(response.isSuccessful()){
+                JSONArray substancesJSON = new JSONArray(jsonData);
+                for(int i = 0; i < substancesJSON.length(); i++){
+                    String ingredient = substancesJSON.getString(i);
+                    Log.v("molecule: ", ingredient);
+                    ingredients.add(ingredient);
+                }
+            }
+
+        } catch (IOException e){
+            e.printStackTrace();
+        } catch (JSONException j){
+            j.printStackTrace();
+        }
+        return ingredients;
     }
 }

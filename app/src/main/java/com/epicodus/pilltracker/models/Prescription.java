@@ -11,7 +11,7 @@ import java.util.Date;
 @Parcel
 public class Prescription {
 
-    public String mActiveIngredient;
+    public ArrayList<String> mActiveIngredients;
     public String mBrandName;
     public String mStrength;
     public double mPillsPerDay; //calculated
@@ -33,8 +33,8 @@ public class Prescription {
 
     }
 
-    public Prescription(String ingredient, String brandName, String strength, String sig, double frequency, double pillsPerDose, String indication, String appearance){
-        this.mActiveIngredient = ingredient;
+    public Prescription(ArrayList<String> ingredients, String brandName, String strength, String sig, double frequency, double pillsPerDose, String indication, String appearance){
+        this.mActiveIngredients = ingredients;
         this.mBrandName = brandName;
         this.mStrength = strength;
         this.mSig = sig;
@@ -59,8 +59,8 @@ public class Prescription {
         return mBrandName;
     }
 
-    public String getmActiveIngredient() {
-        return mActiveIngredient;
+    public ArrayList<String> getmActiveIngredients() {
+        return mActiveIngredients;
     }
 
     public String getmAppearance() {
