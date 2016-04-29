@@ -144,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add Drug"
-                android:id="@+id/enterDrugButton"
+                android:id="@+id/addDrugButton"
                 android:textColor="@color/colorIcons"
                 android:background="@color/colorPrimaryDark"
                 android:layout_below="@id/sigEditText"
