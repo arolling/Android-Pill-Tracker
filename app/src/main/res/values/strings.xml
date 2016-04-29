@@ -13,4 +13,8 @@
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
     <string name="welcome_new_user">"Welcome to Pill Tracker! This is a tool for you to use to track your medication refills and usage. You can see how closely you are following the prescribed dosing and get reminders for prescriptions due for a refill.\n\nFirst, we need some information."</string>
+    <string name="new_drug_search">Enter the beginning of the brand or generic name of your drug</string>
+    <string name="drug_strength">Choose the drug strength</string>
+    <string name="indication_hint">For what reason are you taking this medication?</string>
+    <string name="sig_hint">Enter the instructions on the bottle or as you understand them</string>
 </resources>

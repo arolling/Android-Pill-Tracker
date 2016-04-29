@@ -1,6 +1,8 @@
 package com.epicodus.pilltracker.services;
 
 
+import android.util.Log;
+
 import com.epicodus.pilltracker.Constants;
 
 import okhttp3.Call;
@@ -27,7 +29,7 @@ public class DrugService {
         String url = urlBuilder.build().toString();
 
         Request request = new Request.Builder().url(url).build();
-        //Log.v(TAG, "search url: " + request);
+        Log.v(TAG, "search url: " + request);
 
         Call call = client.newCall(request);
         call.enqueue(callback);

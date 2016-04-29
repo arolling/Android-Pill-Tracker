@@ -9,5 +9,151 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ui.NewMedicationActivity"
     android:background="@color/colorPrimaryLight">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add a New Medication"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="26sp"
+        android:textColor="@color/colorAccent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/new_drug_search"
+                android:id="@+id/drugSearchInstructions"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:padding="8dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/drugNameEditText"
+                android:hint="Drug Name"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/drugSearchInstructions"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="14dp"
+                android:layout_toLeftOf="@+id/drugSearchButton"
+                android:layout_toStartOf="@+id/drugSearchButton" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:id="@+id/drugSearchButton"
+                android:layout_alignTop="@+id/drugNameEditText"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:clickable="true"
+                android:background="@color/colorAccent"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/colorIcons"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"/>
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/confirmDrugSpinner"
+                android:layout_below="@+id/drugNameEditText"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/drugNameEditText"
+                android:layout_alignEnd="@+id/drugNameEditText" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOff="Generic"
+                android:textOn="Brand"
+                android:showText="true"
+                android:id="@+id/brandGenericSwitch"
+                android:layout_below="@+id/drugNameEditText"
+                android:layout_alignRight="@+id/drugConfirmButton"
+                android:layout_alignEnd="@+id/drugConfirmButton"
+                android:singleLine="false" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm"
+                android:id="@+id/drugConfirmButton"
+                android:clickable="true"
+                android:background="@color/colorAccent"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/colorIcons"
+                android:layout_below="@+id/brandGenericSwitch"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drug_strength"
+                android:id="@+id/strengthInstructions"
+                android:layout_below="@+id/drugConfirmButton"
+                android:layout_centerHorizontal="true" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/drugStrengthSpinner"
+                android:layout_below="@+id/strengthInstructions"
+                android:layout_alignRight="@+id/confirmDrugSpinner"
+                android:layout_alignEnd="@+id/confirmDrugSpinner" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/indicationEditText"
+                android:hint="@string/indication_hint"
+                android:layout_below="@id/drugStrengthSpinner"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sigEditText"
+                android:hint="@string/sig_hint"
+                android:layout_below="@id/indicationEditText"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Drug"
+                android:id="@+id/enterDrugButton"
+                android:textColor="@color/colorIcons"
+                android:background="@color/colorPrimaryDark"
+                android:layout_below="@id/sigEditText"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:padding="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
