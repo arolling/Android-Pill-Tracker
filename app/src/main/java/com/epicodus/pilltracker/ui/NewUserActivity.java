@@ -1,4 +1,4 @@
-package com.epicodus.pilltracker;
+package com.epicodus.pilltracker.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.epicodus.pilltracker.R;
 
 import java.util.ArrayList;
 
