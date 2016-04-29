@@ -1,6 +1,6 @@
 # _Pill Tracker_
 
-#### An app to help keep track of one's medications, , April 22, 2016
+#### An app to help keep track of one's medications, April 22, 2016
 
 #### By _**Abigail Rolling**_
 
@@ -12,6 +12,7 @@ This Android application helps a user keep track of their various prescription m
 
 * Clone this repository
 * Open the result in Android Studio
+* Run ROT-13 on the api key string in the comments of gradle.properties and insert it, in quotes, after the variable declaration
 * Run the program in your emulator of choice
 
 
