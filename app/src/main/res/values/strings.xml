@@ -17,4 +17,7 @@
     <string name="drug_strength">Choose the drug strength</string>
     <string name="indication_hint">For what reason are you taking this medication?</string>
     <string name="sig_hint">Enter the instructions on the bottle or as you understand them</string>
+    <string name="quantity_hint">Number of pills per dose (average)</string>
+    <string name="frequency_hint">Number of doses per day (average)</string>
+    <string name="appearance_hint">Describe the pill's appearance</string>
 </resources>

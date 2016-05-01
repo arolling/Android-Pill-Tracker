@@ -17,6 +17,8 @@ import com.epicodus.pilltracker.R;
 import com.epicodus.pilltracker.models.Prescription;
 import com.epicodus.pilltracker.services.DrugService;
 
+import org.parceler.Parcels;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -45,6 +47,9 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
     @Bind(R.id.sigEditText) EditText mSigEditText;
     @Bind(R.id.strengthInstructions) TextView mStrengthInstructions;
     @Bind(R.id.drugSearchInstructions) TextView mSearchInstructions;
+    @Bind(R.id.quantityEditText) TextView mQuantityEditText;
+    @Bind(R.id.frequencyEditText) TextView mFrequencyEditText;
+    @Bind(R.id.appearanceEditText) TextView mAppearanceEditText;
 
 
     @Override
@@ -65,14 +70,14 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
         mIndicationEditText.setVisibility(View.GONE);
         mSigEditText.setVisibility(View.GONE);
         mStrengthInstructions.setVisibility(View.GONE);
+        mFrequencyEditText.setVisibility(View.GONE);
+        mQuantityEditText.setVisibility(View.GONE);
+        mAppearanceEditText.setVisibility(View.GONE);
+
 
         mBrandGenericSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    mBrand = true;
-                } else {
-                    mBrand = false;
-                }
+                mBrand = isChecked;
             }
         });
 
@@ -112,7 +117,18 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
                 String sig = mSigEditText.getText().toString();
                 String indication = mIndicationEditText.getText().toString();
                 String dose = mDrugStrengthSpinner.getSelectedItem().toString();
+                double frequency = Double.parseDouble(mFrequencyEditText.getText().toString());
+                double quantity = Double.parseDouble(mQuantityEditText.getText().toString());
+                String appearance = mAppearanceEditText.getText().toString();
+
+                Prescription newPrescription = new Prescription(mIngredients, mMedication, dose, sig, frequency, quantity, indication, appearance);
+
                 Intent intent = new Intent(NewMedicationActivity.this, PrescriptionListActivity.class);
+                Bundle args = new Bundle();
+                args.putParcelable("rx", Parcels.wrap(newPrescription));
+                intent.putExtra("args", args);
+                startActivity(intent);
+
                 //gather all information and move to next activity
                 break;
             default:
@@ -136,6 +152,8 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
                     public void run() {
                         mConfirmDrugSpinner.setVisibility(View.VISIBLE);
                         mDrugConfirmButton.setVisibility(View.VISIBLE);
+                        mBrandGenericSwitch.setVisibility(View.VISIBLE);
+
 
                         ArrayAdapter adapter = new ArrayAdapter(NewMedicationActivity.this, android.R.layout.simple_spinner_item, mNameSuggestions);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -186,13 +204,18 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
                         mDrugConfirmButton.setVisibility(View.GONE);
                         mConfirmDrugSpinner.setVisibility(View.GONE);
                         mSearchInstructions.setVisibility(View.GONE);
+                        mBrandGenericSwitch.setVisibility(View.GONE);
+
 
                         mStrengthInstructions.setVisibility(View.VISIBLE);
                         mDrugStrengthSpinner.setVisibility(View.VISIBLE);
-                        mBrandGenericSwitch.setVisibility(View.VISIBLE);
                         mIndicationEditText.setVisibility(View.VISIBLE);
                         mSigEditText.setVisibility(View.VISIBLE);
                         mAddDrugButton.setVisibility(View.VISIBLE);
+                        mFrequencyEditText.setVisibility(View.VISIBLE);
+                        mQuantityEditText.setVisibility(View.VISIBLE);
+                        mAppearanceEditText.setVisibility(View.VISIBLE);
+
                     }
                 });
             }

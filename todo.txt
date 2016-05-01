@@ -16,6 +16,7 @@
   f) general pharmaceutical category - from fda api?
   g) date started taking it
   e) current rx - qty, refills remaining, onhand when rx filled
+  f) optional photo of pill - taken by device? implicit intent?
 4) View for each med
   a) How many should be remaining
   b) user reminder preference *** can we add notifications?

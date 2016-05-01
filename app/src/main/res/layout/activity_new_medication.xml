@@ -141,6 +141,35 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/appearanceEditText"
+                android:hint="@string/sig_hint"
+                android:layout_below="@id/sigEditText"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/frequencyEditText"
+                android:hint="@string/appearance_hint"
+                android:layout_below="@id/appearanceEditText"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/quantityEditText"
+                android:hint="@string/quantity_hint"
+                android:layout_below="@id/frequencyEditText"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:inputType="numberDecimal" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -148,7 +177,7 @@
                 android:id="@+id/addDrugButton"
                 android:textColor="@color/colorIcons"
                 android:background="@color/colorPrimaryDark"
-                android:layout_below="@id/sigEditText"
+                android:layout_below="@id/quantityEditText"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:padding="10dp"
