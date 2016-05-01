@@ -49,7 +49,7 @@ public class PrescriptionListActivity extends AppCompatActivity {
 
         setUpPrescriptions();
         Intent intent = getIntent();
-        Prescription newPrescription = Parcels.unwrap(intent.getExtras().getParcelable("args"));
+        Prescription newPrescription = Parcels.unwrap(intent.getBundleExtra("args").getParcelable("rx"));
         mAllPrescriptions.add(newPrescription);
 
         Log.v(TAG, "rx count: " + mAllPrescriptions.size());

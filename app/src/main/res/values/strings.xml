@@ -19,5 +19,5 @@
     <string name="sig_hint">Enter the instructions on the bottle or as you understand them</string>
     <string name="quantity_hint">Number of pills per dose (average)</string>
     <string name="frequency_hint">Number of doses per day (average)</string>
-    <string name="appearance_hint">Describe the pill's appearance</string>
+    <string name="appearance_hint">Describe the pill\'s appearance</string>
 </resources>
