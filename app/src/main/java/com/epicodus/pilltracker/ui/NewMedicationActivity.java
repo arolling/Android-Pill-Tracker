@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 
 import com.epicodus.pilltracker.R;
+import com.epicodus.pilltracker.models.Prescription;
 import com.epicodus.pilltracker.services.DrugService;
 
 import java.io.IOException;
@@ -29,6 +30,8 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
     private ArrayList<String> mUserInfo = new ArrayList<>();
     private ArrayList<String> mNameSuggestions = new ArrayList<>();
     private ArrayList<String> mIngredients = new ArrayList<>();
+    private ArrayList<String> mStrengths = new ArrayList<>();
+    private String mMedication;
     private boolean mBrand = false;
     @Bind(R.id.drugSearchButton) Button mDrugSearchButton;
     @Bind(R.id.drugConfirmButton) Button mDrugConfirmButton;
@@ -63,6 +66,7 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
 
         mDrugSearchButton.setOnClickListener(this);
         mDrugConfirmButton.setOnClickListener(this);
+        mAddDrugButton.setOnClickListener(this);
     }
 
     @Override
@@ -74,13 +78,21 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.drugConfirmButton:
                 Log.v(TAG, "Brand: " + mBrand);
+                String medName = mConfirmDrugSpinner.getSelectedItem().toString();
+                mMedication = medName.substring(0, medName.indexOf("'"));
                 if(mBrand){
-                    String medication = mConfirmDrugSpinner.getSelectedItem().toString();
-                    getActiveIngredients(medication);
+                    getActiveIngredients(mMedication);
+                    getStrengths(mMedication);
+                } else{
+                    mIngredients.add(mMedication);
+                    getStrengths(mMedication);
                 }
                 // read switch for generic/brand, set generic/brand name (with api call if nec), receive drug strengths and populate spinner
                 break;
             case R.id.addDrugButton:
+                String sig = mSigEditText.getText().toString();
+                String indication = mIndicationEditText.getText().toString();
+                String dose = mDrugStrengthSpinner.getSelectedItem().toString();
                 //gather all information and move to next activity
                 break;
             default:
@@ -126,6 +138,29 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
             }
         });
 
+    }
+
+    private void getStrengths(String medication){
+        final DrugService drugService = new DrugService();
+        drugService.findStrengths(medication, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) {
+                mStrengths = drugService.processStrengths(response);
+                NewMedicationActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ArrayAdapter adapter = new ArrayAdapter(NewMedicationActivity.this, android.R.layout.simple_spinner_item, mStrengths);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        mDrugStrengthSpinner.setAdapter(adapter);
+                    }
+                });
+            }
+        });
     }
 }
 

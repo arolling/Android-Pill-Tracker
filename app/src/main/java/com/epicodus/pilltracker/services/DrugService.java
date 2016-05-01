@@ -85,7 +85,7 @@ public class DrugService {
                 JSONArray substancesJSON = new JSONArray(jsonData);
                 for(int i = 0; i < substancesJSON.length(); i++){
                     String ingredient = substancesJSON.getString(i);
-                    Log.v("molecule: ", ingredient);
+                    //Log.v("molecule: ", ingredient);
                     ingredients.add(ingredient);
                 }
             }
@@ -96,5 +96,40 @@ public class DrugService {
             j.printStackTrace();
         }
         return ingredients;
+    }
+
+    public void findStrengths(String drug, Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(MAPI_API_BASE_URL).newBuilder();
+        urlBuilder.addPathSegment(drug);
+        urlBuilder.addPathSegment(MAPI_DOSES_SEARCH);
+
+        String url = urlBuilder.build().toString();
+
+        Request request = new Request.Builder().url(url).build();
+        Log.v(TAG, "doses url: " + request);
+
+        Call call = client.newCall(request);
+        call.enqueue(callback);
+    }
+
+    public ArrayList<String> processStrengths(Response response){
+        ArrayList<String> strengths = new ArrayList<>();
+        try{
+            String jsonData = response.body().string();
+            if(response.isSuccessful()){
+                JSONArray dosagesJSON = new JSONArray(jsonData);
+                for(int i = 0; i < dosagesJSON.length(); i++){
+                    String dose = dosagesJSON.getString(i);
+                    strengths.add(dose);
+                }
+            }
+
+        } catch (IOException e){
+            e.printStackTrace();
+        } catch (JSONException j){
+            j.printStackTrace();
+        }
+        return strengths;
     }
 }
