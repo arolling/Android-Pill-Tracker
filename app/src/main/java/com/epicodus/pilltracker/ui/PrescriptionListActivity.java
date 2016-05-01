@@ -3,17 +3,25 @@ package com.epicodus.pilltracker.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.epicodus.pilltracker.R;
+import com.epicodus.pilltracker.adapters.PrescriptionListAdapter;
 import com.epicodus.pilltracker.models.Prescription;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class PrescriptionListActivity extends AppCompatActivity {
     public static final String TAG = PrescriptionListActivity.class.getSimpleName();
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
+    private PrescriptionListAdapter mAdapter;
 
     ArrayList<Prescription> mAllPrescriptions = new ArrayList<>();
 
@@ -46,13 +54,18 @@ public class PrescriptionListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prescription_list);
+        ButterKnife.bind(this);
 
         setUpPrescriptions();
         Intent intent = getIntent();
         Prescription newPrescription = Parcels.unwrap(intent.getBundleExtra("args").getParcelable("rx"));
         mAllPrescriptions.add(newPrescription);
 
-        Log.v(TAG, "rx count: " + mAllPrescriptions.size());
+        mAdapter = new PrescriptionListAdapter(getApplicationContext(), mAllPrescriptions);
+        mRecyclerView.setAdapter(mAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PrescriptionListActivity.this);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setHasFixedSize(true);
     }
 
 

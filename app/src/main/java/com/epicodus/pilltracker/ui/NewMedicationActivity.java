@@ -96,7 +96,6 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.drugConfirmButton:
 
-                Log.v(TAG, "Brand: " + mBrand);
                 String medName = mConfirmDrugSpinner.getSelectedItem().toString();
                 if(medName.contains("'")){
                     mMedication = medName.substring(0, medName.indexOf("'"));
