@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.epicodus.pilltracker.R;
 import com.epicodus.pilltracker.models.Prescription;
@@ -42,6 +43,8 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
     @Bind(R.id.brandGenericSwitch) Switch mBrandGenericSwitch;
     @Bind(R.id.indicationEditText) EditText mIndicationEditText;
     @Bind(R.id.sigEditText) EditText mSigEditText;
+    @Bind(R.id.strengthInstructions) TextView mStrengthInstructions;
+    @Bind(R.id.drugSearchInstructions) TextView mSearchInstructions;
 
 
     @Override
@@ -53,6 +56,15 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
         Intent intent = getIntent();
         mUserInfo = intent.getStringArrayListExtra("userInfo");
         Log.v(TAG, "User info: " + android.text.TextUtils.join(", ", mUserInfo));
+
+        mDrugConfirmButton.setVisibility(View.GONE);
+        mAddDrugButton.setVisibility(View.GONE);
+        mConfirmDrugSpinner.setVisibility(View.GONE);
+        mDrugStrengthSpinner.setVisibility(View.GONE);
+        mBrandGenericSwitch.setVisibility(View.GONE);
+        mIndicationEditText.setVisibility(View.GONE);
+        mSigEditText.setVisibility(View.GONE);
+        mStrengthInstructions.setVisibility(View.GONE);
 
         mBrandGenericSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -75,11 +87,17 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
             case R.id.drugSearchButton:
                 String search = mDrugNameSearch.getText().toString();
                 getMatches(search);
+
                 break;
             case R.id.drugConfirmButton:
+
                 Log.v(TAG, "Brand: " + mBrand);
                 String medName = mConfirmDrugSpinner.getSelectedItem().toString();
-                mMedication = medName.substring(0, medName.indexOf("'"));
+                if(medName.contains("'")){
+                    mMedication = medName.substring(0, medName.indexOf("'"));
+                } else {
+                    mMedication = medName;
+                }
                 if(mBrand){
                     getActiveIngredients(mMedication);
                     getStrengths(mMedication);
@@ -87,12 +105,14 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
                     mIngredients.add(mMedication);
                     getStrengths(mMedication);
                 }
+
                 // read switch for generic/brand, set generic/brand name (with api call if nec), receive drug strengths and populate spinner
                 break;
             case R.id.addDrugButton:
                 String sig = mSigEditText.getText().toString();
                 String indication = mIndicationEditText.getText().toString();
                 String dose = mDrugStrengthSpinner.getSelectedItem().toString();
+                Intent intent = new Intent(NewMedicationActivity.this, PrescriptionListActivity.class);
                 //gather all information and move to next activity
                 break;
             default:
@@ -114,6 +134,9 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
                 NewMedicationActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        mConfirmDrugSpinner.setVisibility(View.VISIBLE);
+                        mDrugConfirmButton.setVisibility(View.VISIBLE);
+
                         ArrayAdapter adapter = new ArrayAdapter(NewMedicationActivity.this, android.R.layout.simple_spinner_item, mNameSuggestions);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         mConfirmDrugSpinner.setAdapter(adapter);
@@ -157,6 +180,19 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
                         ArrayAdapter adapter = new ArrayAdapter(NewMedicationActivity.this, android.R.layout.simple_spinner_item, mStrengths);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         mDrugStrengthSpinner.setAdapter(adapter);
+
+                        mDrugNameSearch.setVisibility(View.GONE);
+                        mDrugSearchButton.setVisibility(View.GONE);
+                        mDrugConfirmButton.setVisibility(View.GONE);
+                        mConfirmDrugSpinner.setVisibility(View.GONE);
+                        mSearchInstructions.setVisibility(View.GONE);
+
+                        mStrengthInstructions.setVisibility(View.VISIBLE);
+                        mDrugStrengthSpinner.setVisibility(View.VISIBLE);
+                        mBrandGenericSwitch.setVisibility(View.VISIBLE);
+                        mIndicationEditText.setVisibility(View.VISIBLE);
+                        mSigEditText.setVisibility(View.VISIBLE);
+                        mAddDrugButton.setVisibility(View.VISIBLE);
                     }
                 });
             }
