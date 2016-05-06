@@ -1,0 +1,163 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.epicodus.pilltracker.ui.PrescriptionDetailFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorIcons">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:id="@+id/rxBannerImageView"
+                android:src="@drawable/rx_banner"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:layout_toEndOf="@+id/rxBannerImageView"
+                android:layout_toRightOf="@id/rxBannerImageView"
+                android:id="@+id/rxDescriptionLayout"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Brand Name"
+                    android:id="@+id/brandDetailTextView"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Generic Name"
+                    android:id="@+id/genericDetailTextView"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Strength"
+                    android:id="@+id/strengthDetailTextView"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="User entered appearance"
+                    android:id="@+id/appearanceDetailTextView"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="User entered indication"
+                    android:id="@+id/indicationDetailTextView"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryText" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rxBannerImageView"
+                android:id="@+id/sigDetailTextView"
+                android:textSize="14sp"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/colorPrimaryText"
+                android:text="Lengthy Sig description with details provided by patient, potentially several lines long and of questionable accuracy" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Doses per day"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:id="@+id/frequencyDetailTextView"
+            android:textColor="@color/colorIcons"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity per dose"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:id="@+id/quantityDoseDetailTextView"
+            android:textColor="@color/colorIcons"
+            android:textSize="18sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/dosingDetailLayout"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_weight="0.5"
+                android:id="@+id/questionsRecyclerView"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_weight="0.5"
+                android:id="@+id/notesRecyclerView"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Question"
+            android:layout_marginBottom="55dp"
+            android:id="@+id/addQuestionButton"
+            android:background="@color/colorAccent"
+            android:textColor="@color/colorIcons"
+            android:textSize="15sp"
+            android:layout_gravity="bottom" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Notes"
+            android:id="@+id/addNotesButton"
+            android:background="@color/colorAccent"
+            android:textColor="@color/colorIcons"
+            android:textSize="15sp"
+            android:layout_gravity="bottom" />
+
+
+</FrameLayout>

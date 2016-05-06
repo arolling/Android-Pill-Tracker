@@ -4,6 +4,7 @@ import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by abigailrolling on 4/29/16.
@@ -11,7 +12,7 @@ import java.util.Date;
 @Parcel
 public class Prescription {
 
-    public ArrayList<String> mActiveIngredients;
+    public List<String> mActiveIngredients;
     public String mBrandName;
     public String mStrength;
     public double mPillsPerDay; //calculated
@@ -26,8 +27,8 @@ public class Prescription {
     public Date mFirstPrescribed;
     public double mCurrentOnhand;
     public Date mDateOfCurrentOnhand;
-    public ArrayList<String> mQuestions; //for doctor or pharmacist
-    public ArrayList<String> mConcerns; //side effects, worries
+    public List<String> mQuestions; //for doctor or pharmacist
+    public List<String> notes; //side effects, worries
 
     public Prescription(){
 
@@ -43,7 +44,7 @@ public class Prescription {
         this.mIndication = indication;
         this.mAppearance = appearance;
         this.mQuestions = new ArrayList<>();
-        this.mConcerns = new ArrayList<>();
+        this.notes = new ArrayList<>();
         this.mPillsPerDay = frequency * pillsPerDose;
     }
 
@@ -59,7 +60,7 @@ public class Prescription {
         return mBrandName;
     }
 
-    public ArrayList<String> getmActiveIngredients() {
+    public List<String> getmActiveIngredients() {
         return mActiveIngredients;
     }
 
@@ -88,14 +89,14 @@ public class Prescription {
     }
 
     public void addConcern(String concern){
-        this.mConcerns.add(concern);
+        this.notes.add(concern);
     }
 
-    public ArrayList<String> getmQuestions() {
+    public List<String> getmQuestions() {
         return mQuestions;
     }
 
-    public ArrayList<String> getmConcerns() {
-        return mConcerns;
+    public List<String> getNotes() {
+        return notes;
     }
 }
