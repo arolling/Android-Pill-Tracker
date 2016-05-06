@@ -1,6 +1,7 @@
 package com.epicodus.pilltracker.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.widget.TextView;
 
 import com.epicodus.pilltracker.R;
 import com.epicodus.pilltracker.models.Prescription;
+import com.epicodus.pilltracker.ui.PrescriptionDetailActivity;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -55,6 +59,18 @@ public class PrescriptionListAdapter extends RecyclerView.Adapter<PrescriptionLi
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    int itemPosition = getLayoutPosition();
+                    Intent intent = new Intent(mContext, PrescriptionDetailActivity.class);
+                    intent.putExtra("position", itemPosition + "");
+                    intent.putExtra("prescriptions", Parcels.wrap(mPrescriptions));
+                    mContext.startActivity(intent);
+                }
+            });
         }
 
         public void bindPrescription(Prescription prescription){

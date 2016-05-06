@@ -60,6 +60,10 @@ public class Prescription {
         }
     }
 
+    public String showPrettyQuantityPerDose(){
+        return "Taking an average of " + qtyPerDose + " pill(s) per dose";
+    }
+
     public String getSig() {
         return sig;
     }
