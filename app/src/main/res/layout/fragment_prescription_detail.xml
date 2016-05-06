@@ -125,8 +125,8 @@
             android:orientation="horizontal">
 
             <android.support.v7.widget.RecyclerView
-                android:layout_width="0dp"
                 android:layout_height="150dp"
+                android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:id="@+id/questionsRecyclerView"/>
 
@@ -139,25 +139,32 @@
 
         </LinearLayout>
     </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="0.5"
             android:text="Add Question"
-            android:layout_marginBottom="55dp"
             android:id="@+id/addQuestionButton"
             android:background="@color/colorAccent"
             android:textColor="@color/colorIcons"
             android:textSize="15sp"
             android:layout_gravity="bottom" />
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Notes"
-            android:id="@+id/addNotesButton"
-            android:background="@color/colorAccent"
-            android:textColor="@color/colorIcons"
+            android:layout_weight="0.5"
+            android:text="Add Note"
+            android:id="@+id/addNoteButton"
+            android:background="@color/colorPrimaryLight"
+            android:textColor="@color/colorAccent"
             android:textSize="15sp"
             android:layout_gravity="bottom" />
+    </LinearLayout>
+
 
 
 </FrameLayout>

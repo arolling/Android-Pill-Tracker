@@ -12,22 +12,22 @@ import java.util.List;
 @Parcel
 public class Prescription {
 
-    public List<String> mActiveIngredients;
-    public String mBrandName;
-    public String mStrength;
-    public double mPillsPerDay; //calculated
-    public String mSig;
-    public double mFrequency; //spinner - calculates per day float if < once per day (ie alendronate)
-    public double mPillsPerDose; //average if varies please
-    public String mQuantityFilled;
-    public String mQuantityRemaining; //calculated from currentonhand, date, qt filled, current date, argh
-    public Date mDateFilled;
-    public String mIndication; //why am I taking this?
-    public String mAppearance;
-    public Date mFirstPrescribed;
-    public double mCurrentOnhand;
-    public Date mDateOfCurrentOnhand;
-    public List<String> mQuestions; //for doctor or pharmacist
+    public List<String> activeIngredients;
+    public String brandName;
+    public String strength;
+    public double dailyUsage; //calculated
+    public String sig;
+    public double frequency; //spinner - calculates per day float if < once per day (ie alendronate)
+    public double qtyPerDose; //average if varies please
+    public String quantityFilled;
+    public String quantityRemaining; //calculated from current onhand, date, qt filled, current date, argh
+    public Date dateFilled;
+    public String indication; //why am I taking this?
+    public String appearance;
+    public Date firstPrescribed;
+    public double currentOnhand;
+    public Date dateOfCurrentOnhand;
+    public List<String> questions; //for doctor or pharmacist
     public List<String> notes; //side effects, worries
 
     public Prescription(){
@@ -35,68 +35,104 @@ public class Prescription {
     }
 
     public Prescription(ArrayList<String> ingredients, String brandName, String strength, String sig, double frequency, double pillsPerDose, String indication, String appearance){
-        this.mActiveIngredients = ingredients;
-        this.mBrandName = brandName;
-        this.mStrength = strength;
-        this.mSig = sig;
-        this.mFrequency = frequency;
-        this.mPillsPerDose = pillsPerDose;
-        this.mIndication = indication;
-        this.mAppearance = appearance;
-        this.mQuestions = new ArrayList<>();
+        this.activeIngredients = ingredients;
+        this.brandName = brandName;
+        this.strength = strength;
+        this.sig = sig;
+        this.frequency = frequency;
+        this.qtyPerDose = pillsPerDose;
+        this.indication = indication;
+        this.appearance = appearance;
+        this.questions = new ArrayList<>();
         this.notes = new ArrayList<>();
-        this.mPillsPerDay = frequency * pillsPerDose;
+        this.dailyUsage = frequency * pillsPerDose;
     }
 
-    public String getmSig() {
-        return mSig;
+    public String showPrettyFrequency(){
+        if(frequency == 1){
+            return "To be taken once per day";
+        } else if(frequency % 1 == 0){
+            return "To be taken " + (int) frequency + " times per day";
+        } else if(frequency * 7 >= 0.95) {
+            return "To be taken " + (int)Math.round(frequency * 7) + " times per week";
+        } else {
+            return "To be taken " + (int)Math.round(frequency * 30) + " time(s) per month";
+        }
     }
 
-    public String getmStrength() {
-        return mStrength;
+    public String getSig() {
+        return sig;
     }
 
-    public String getmBrandName() {
-        return mBrandName;
+    public String getStrength() {
+        return strength;
     }
 
-    public List<String> getmActiveIngredients() {
-        return mActiveIngredients;
+    public String getBrandName() {
+        return brandName;
     }
 
-    public String getmAppearance() {
-        return mAppearance;
+    public List<String> getActiveIngredients() {
+        return activeIngredients;
     }
 
-    public String getmIndication() {
-        return mIndication;
+    public String getAppearance() {
+        return appearance;
     }
 
-    public double getmPillsPerDose() {
-        return mPillsPerDose;
+    public String getIndication() {
+        return indication;
     }
 
-    public double getmPillsPerDay() {
-        return mPillsPerDay;
+    public double getQtyPerDose() {
+        return qtyPerDose;
     }
 
-    public double getmFrequency() {
-        return mFrequency;
+    public double getDailyUsage() {
+        return dailyUsage;
+    }
+
+    public double getFrequency() {
+        return frequency;
     }
 
     public void addQuestion(String question){
-        this.mQuestions.add(question);
+        this.questions.add(question);
     }
 
     public void addConcern(String concern){
         this.notes.add(concern);
     }
 
-    public List<String> getmQuestions() {
-        return mQuestions;
+    public List<String> getQuestions() {
+        return questions;
     }
 
     public List<String> getNotes() {
         return notes;
+    }
+
+    public String getQuantityFilled() {
+        return quantityFilled;
+    }
+
+    public String getQuantityRemaining() {
+        return quantityRemaining;
+    }
+
+    public Date getDateFilled() {
+        return dateFilled;
+    }
+
+    public Date getFirstPrescribed() {
+        return firstPrescribed;
+    }
+
+    public double getCurrentOnhand() {
+        return currentOnhand;
+    }
+
+    public Date getDateOfCurrentOnhand() {
+        return dateOfCurrentOnhand;
     }
 }

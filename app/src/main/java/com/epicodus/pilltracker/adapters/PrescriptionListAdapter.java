@@ -58,10 +58,10 @@ public class PrescriptionListAdapter extends RecyclerView.Adapter<PrescriptionLi
         }
 
         public void bindPrescription(Prescription prescription){
-            mBrandTextView.setText(prescription.getmBrandName());
-            mGenericTextView.setText(android.text.TextUtils.join(", ", prescription.getmActiveIngredients()));
-            mDoseTextView.setText(prescription.getmStrength());
-            mIndicationTextView.setText(prescription.getmIndication());
+            mBrandTextView.setText(prescription.getBrandName());
+            mGenericTextView.setText(android.text.TextUtils.join(", ", prescription.getActiveIngredients()));
+            mDoseTextView.setText(prescription.getStrength());
+            mIndicationTextView.setText(prescription.getIndication());
         }
     }
 }
