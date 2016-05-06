@@ -72,8 +72,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(MainActivity.this, page, Toast.LENGTH_SHORT).show();
             switch (page){
                 case "Set Up New Medication":
-                    Intent intent = new Intent(MainActivity.this, NewMedicationActivity.class);
-                    startActivity(intent);
+                    Intent newMedIntent = new Intent(MainActivity.this, NewMedicationActivity.class);
+                    startActivity(newMedIntent);
+                    break;
+                case "My Medications":
+                    Intent listIntent = new Intent(MainActivity.this, PrescriptionListActivity.class);
+                    startActivity(listIntent);
                     break;
                 default:
                     break;
