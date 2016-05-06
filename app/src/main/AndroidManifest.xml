@@ -38,7 +38,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.PrescriptionListActivity" />
         </activity>
-        <activity android:name=".ui.LoginActiviy"></activity>
+        <activity android:name=".ui.LoginActivity"></activity>
     </application>
 
 </manifest>

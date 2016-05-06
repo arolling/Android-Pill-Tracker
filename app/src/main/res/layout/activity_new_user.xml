@@ -3,10 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+
     tools:context=".ui.NewUserActivity"
     android:background="@color/colorPrimaryLight">
 
@@ -20,8 +17,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorIcons"
         android:textStyle="bold"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <GridLayout
         android:layout_width="match_parent"
@@ -31,14 +33,14 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/textView"
         android:layout_alignEnd="@+id/textView"
-        android:layout_above="@+id/addMedicationsButton">
+        android:layout_above="@+id/createNewAccountButton">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/etUserName"
+            android:ems="5"
+            android:id="@+id/newUserNameEditText"
             android:singleLine="true"
             android:layout_row="0"
             android:layout_column="0"
@@ -47,9 +49,42 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="5"
+            android:id="@+id/emaileEditText"
+            android:singleLine="true"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:hint="Your Email Address" />
+
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="5"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:hint="Password"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/confirmPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="5"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:hint="Confirm password"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:hint="Your Doctor&apos;s Name"
-            android:ems="10"
+            android:ems="5"
             android:id="@+id/etDoctorName"
             android:singleLine="true"
             android:layout_row="6"
@@ -58,12 +93,12 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPostalAddress"
-            android:ems="10"
-            android:id="@+id/etDoctorAddress"
+            android:inputType="phone"
+            android:ems="5"
+            android:id="@+id/etDoctorPhone"
             android:layout_row="7"
             android:layout_column="0"
-            android:hint="Your Doctor&apos;s Address" />
+            android:hint="Your Doctor&apos;s Phone Number" />
 
         <EditText
             android:layout_width="match_parent"
@@ -77,20 +112,20 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPostalAddress"
-            android:ems="10"
-            android:id="@+id/etPharmacyAddress"
+            android:inputType="phone"
+            android:ems="5"
+            android:id="@+id/etPharmacyPhone"
             android:layout_row="9"
             android:layout_column="0"
-            android:hint="Your Preferred Pharmacy&apos;s Address" />
+            android:hint="Your Pharmacy&apos;s Phone Number" />
 
     </GridLayout>
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Start Adding Medications"
-        android:id="@+id/addMedicationsButton"
+        android:text="Create New Account"
+        android:id="@+id/createNewAccountButton"
         android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"

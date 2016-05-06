@@ -15,12 +15,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class NewUserActivity extends AppCompatActivity implements View.OnClickListener {
-    @Bind(R.id.addMedicationsButton) Button mAddMedsButton;
-    @Bind(R.id.etUserName) EditText mUserName;
+    @Bind(R.id.createNewAccountButton) Button mCreateNewAccountButton;
+    @Bind(R.id.newUserNameEditText) EditText mUserName;
     @Bind(R.id.etDoctorName) EditText mDoctorName;
-    @Bind(R.id.etDoctorAddress) EditText mDoctorAddress;
+    @Bind(R.id.etDoctorPhone) EditText mDoctorPhone;
     @Bind(R.id.etPharmacyName) EditText mPharmacyName;
-    @Bind(R.id.etPharmacyAddress) EditText mPharmacyAddress;
+    @Bind(R.id.etPharmacyPhone) EditText mPharmacyPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,24 +28,24 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_new_user);
         ButterKnife.bind(this);
 
-        mAddMedsButton.setOnClickListener(this);
+        mCreateNewAccountButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if (v == mAddMedsButton) {
+        if (v == mCreateNewAccountButton) {
             Intent intent = new Intent(NewUserActivity.this, NewMedicationActivity.class);
             String userName = mUserName.getText().toString();
             String doctorName = mDoctorName.getText().toString();
-            String doctorAddress = mDoctorAddress.getText().toString();
+            String doctorPhone = mDoctorPhone.getText().toString();
             String pharmacyName = mPharmacyName.getText().toString();
-            String pharmacyAddress = mPharmacyAddress.getText().toString();
+            String pharmacyPhone = mPharmacyPhone.getText().toString();
             ArrayList<String> userInfo = new ArrayList<>();
             userInfo.add(userName);
             userInfo.add(doctorName);
-            userInfo.add(doctorAddress);
+            userInfo.add(doctorPhone);
             userInfo.add(pharmacyName);
-            userInfo.add(pharmacyAddress);
+            userInfo.add(pharmacyPhone);
             intent.putStringArrayListExtra("userInfo", userInfo);
             startActivity(intent);
         }
