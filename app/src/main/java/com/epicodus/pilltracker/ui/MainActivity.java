@@ -70,6 +70,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             String page = ((TextView)view).getText().toString();
             Toast.makeText(MainActivity.this, page, Toast.LENGTH_SHORT).show();
+            switch (page){
+                case "Set Up New Medication":
+                    Intent intent = new Intent(MainActivity.this, NewMedicationActivity.class);
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 

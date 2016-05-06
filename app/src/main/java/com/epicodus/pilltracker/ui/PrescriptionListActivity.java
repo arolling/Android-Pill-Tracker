@@ -58,8 +58,10 @@ public class PrescriptionListActivity extends AppCompatActivity {
 
         setUpPrescriptions();
         Intent intent = getIntent();
-        Prescription newPrescription = Parcels.unwrap(intent.getBundleExtra("args").getParcelable("rx"));
-        mAllPrescriptions.add(newPrescription);
+        if(intent.getBundleExtra("args") != null){
+            Prescription newPrescription = Parcels.unwrap(intent.getBundleExtra("args").getParcelable("rx"));
+            mAllPrescriptions.add(newPrescription);
+        }
 
         mAdapter = new PrescriptionListAdapter(getApplicationContext(), mAllPrescriptions);
         mRecyclerView.setAdapter(mAdapter);

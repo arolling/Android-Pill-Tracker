@@ -27,6 +27,7 @@ public class PrescriptionDetailFragment extends Fragment implements View.OnClick
     @Bind(R.id.strengthDetailTextView) TextView mStrengthDetailTextView;
     @Bind(R.id.appearanceDetailTextView) TextView mAppearanceDetailTextView;
     @Bind(R.id.indicationDetailTextView) TextView mIndicationDetailTextView;
+    @Bind(R.id.sigDetailTextView) TextView mSigDetailTextView;
     @Bind(R.id.frequencyDetailTextView) TextView mFrequencyDetailTextView;
     @Bind(R.id.quantityDoseDetailTextView) TextView mQuantityDoseDetailTextView;
     @Bind(R.id.questionsRecyclerView) RecyclerView mQuestionsRecyclerView;
@@ -65,6 +66,7 @@ public class PrescriptionDetailFragment extends Fragment implements View.OnClick
         mBrandDetailTextView.setText(mPrescription.getBrandName());
         mGenericDetailTextView.setText(android.text.TextUtils.join(", ", mPrescription.getActiveIngredients()));
         mStrengthDetailTextView.setText(mPrescription.getStrength());
+        mSigDetailTextView.setText(mPrescription.getSig());
         mAppearanceDetailTextView.setText(mPrescription.getAppearance());
         mIndicationDetailTextView.setText(mPrescription.getIndication());
         mFrequencyDetailTextView.setText(mPrescription.showPrettyFrequency());

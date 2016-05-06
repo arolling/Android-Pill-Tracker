@@ -27,8 +27,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.PrescriptionListActivity" />
-        <activity android:name=".ui.PrescriptionDetailActivity"></activity>
+        <activity android:name=".ui.PrescriptionListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
+        <activity android:name=".ui.PrescriptionDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.PrescriptionListActivity" />
+        </activity>
     </application>
 
 </manifest>

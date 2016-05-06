@@ -58,10 +58,6 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_new_medication);
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        mUserInfo = intent.getStringArrayListExtra("userInfo");
-        Log.v(TAG, "User info: " + android.text.TextUtils.join(", ", mUserInfo));
-
         mDrugConfirmButton.setVisibility(View.GONE);
         mAddDrugButton.setVisibility(View.GONE);
         mConfirmDrugSpinner.setVisibility(View.GONE);

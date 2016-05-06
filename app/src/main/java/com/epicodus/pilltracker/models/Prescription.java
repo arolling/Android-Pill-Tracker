@@ -54,7 +54,7 @@ public class Prescription {
         } else if(frequency % 1 == 0){
             return "To be taken " + (int) frequency + " times per day";
         } else if(frequency * 7 >= 0.95) {
-            return "To be taken " + (int)Math.round(frequency * 7) + " times per week";
+            return "To be taken " + (int)Math.round(frequency * 7) + " time(s) per week";
         } else {
             return "To be taken " + (int)Math.round(frequency * 30) + " time(s) per month";
         }
