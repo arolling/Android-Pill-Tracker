@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="5"
-            android:id="@+id/emaileEditText"
+            android:id="@+id/emailEditText"
             android:singleLine="true"
             android:layout_row="1"
             android:layout_column="0"

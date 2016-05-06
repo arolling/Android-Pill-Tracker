@@ -12,4 +12,9 @@ public class Constants {
     public static final String MAPI_AUTOCOMPLETE_TERM = "autocomplete";
     public static final String MAPI_QUERY_PARAMETER = "query";
     public static final String MAPI_DOSES_SEARCH = "doses.json";
+
+    public static final String FIREBASE_LOCATION_USERS = "users";
+    public static final String FIREBASE_PROPERTY_EMAIL = "email";
+    public static final String KEY_UID = "UID";
+    public static final String FIREBASE_URL_USERS = FIREBASE_URL + "/" + FIREBASE_LOCATION_USERS;
 }

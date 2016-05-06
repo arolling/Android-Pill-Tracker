@@ -21,7 +21,7 @@ import com.epicodus.pilltracker.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
     private String[] mNavChoices;
     protected @Bind(R.id.drawer_layout) DrawerLayout mDrawerLayout;
@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    @Bind(R.id.newUserButton) Button mNewUserButton;
 
 
     @Override
@@ -50,18 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
-        mNewUserButton.setOnClickListener(this);
     }
-
-    @Override
-    public void onClick(View v) {
-        if (v == mNewUserButton) {
-            Intent intent = new Intent(MainActivity.this, NewUserActivity.class);
-            startActivity(intent);
-        }
-    }
-
 
 
     // START DRAWER/MENU RELATED FUNCTIONS
