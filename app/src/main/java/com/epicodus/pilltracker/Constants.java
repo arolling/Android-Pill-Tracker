@@ -14,7 +14,9 @@ public class Constants {
     public static final String MAPI_DOSES_SEARCH = "doses.json";
 
     public static final String FIREBASE_LOCATION_USERS = "users";
+    public static final String FIREBASE_LOCATION_PRESCRIPTIONS = "prescriptions";
     public static final String FIREBASE_PROPERTY_EMAIL = "email";
     public static final String KEY_UID = "UID";
     public static final String FIREBASE_URL_USERS = FIREBASE_URL + "/" + FIREBASE_LOCATION_USERS;
+    public static final String FIREBASE_URL_PRESCRIPTIONS = FIREBASE_URL + "/" + FIREBASE_LOCATION_PRESCRIPTIONS;
 }

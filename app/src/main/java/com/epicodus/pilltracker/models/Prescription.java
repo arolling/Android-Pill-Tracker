@@ -17,7 +17,7 @@ public class Prescription {
     public String strength;
     public double dailyUsage; //calculated
     public String sig;
-    public double frequency; //spinner - calculates per day float if < once per day (ie alendronate)
+    public double frequency; //refactor to spinner - calculates per day float if < once per day (ie alendronate)
     public double qtyPerDose; //average if varies please
     public String quantityFilled;
     public String quantityRemaining; //calculated from current onhand, date, qt filled, current date, argh
@@ -29,6 +29,7 @@ public class Prescription {
     public Date dateOfCurrentOnhand;
     public List<String> questions; //for doctor or pharmacist
     public List<String> notes; //side effects, worries
+    public String pushId;
 
     public Prescription(){
 
@@ -104,8 +105,8 @@ public class Prescription {
         this.questions.add(question);
     }
 
-    public void addConcern(String concern){
-        this.notes.add(concern);
+    public void addNote(String note){
+        this.notes.add(note);
     }
 
     public List<String> getQuestions() {
@@ -139,4 +140,13 @@ public class Prescription {
     public Date getDateOfCurrentOnhand() {
         return dateOfCurrentOnhand;
     }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
+
 }
