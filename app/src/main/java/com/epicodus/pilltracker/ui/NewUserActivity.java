@@ -70,6 +70,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void createNewUser(){
+        mAuthProgressDialog.show();
         final String name = mUserName.getText().toString();
         final String email = mEmailEditText.getText().toString();
         final String password = mPasswordEditText.getText().toString();
@@ -83,7 +84,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
         boolean validName = isValidName(name);
         boolean validPassword = isValidPassword(password, confirmPassword);
         if(!validEmail || !validName || !validPassword){
-            //mAuthProgressDialog.hide();
+            mAuthProgressDialog.hide();
             return;
         }
 
@@ -96,7 +97,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
 
                     @Override
                     public void onAuthenticated(AuthData authData) {
-                        //mAuthProgressDialog.hide();
+                        mAuthProgressDialog.dismiss();
                         if (authData != null) {
                             String userUid = authData.getUid();
 
@@ -113,7 +114,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
 
                     @Override
                     public void onAuthenticationError(FirebaseError firebaseError) {
-                        //mAuthProgressDialog.hide();
+                        mAuthProgressDialog.dismiss();
                         switch (firebaseError.getCode()) {
                             case FirebaseError.INVALID_EMAIL:
                             case FirebaseError.USER_DOES_NOT_EXIST:
@@ -134,7 +135,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onError(FirebaseError firebaseError) {
-                //mAuthProgressDialog.hide();
+                mAuthProgressDialog.dismiss();
                 Log.d(TAG, "error occurred " +
                         firebaseError);
             }
