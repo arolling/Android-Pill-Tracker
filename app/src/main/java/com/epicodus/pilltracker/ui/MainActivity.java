@@ -16,7 +16,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.epicodus.pilltracker.Constants;
 import com.epicodus.pilltracker.R;
+import com.firebase.client.Firebase;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,12 +32,16 @@ public class MainActivity extends AppCompatActivity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
 
+    private Firebase mFirebaseRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
 
         mNavChoices = getResources().getStringArray(R.array.nav_choices);
         mTitle = mDrawerTitle = getTitle();
@@ -130,9 +136,26 @@ public class MainActivity extends AppCompatActivity {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        // Handle your other action bar items...
+
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            logout();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void logout() {
+        mFirebaseRef.unauth();
+        takeUserToLoginScreenOnUnAuth();
+    }
+
+    private void takeUserToLoginScreenOnUnAuth() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
 

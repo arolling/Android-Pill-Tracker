@@ -86,6 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if(authData != null){
                         String userUid = authData.getUid();
                         mSharedPreferencesEditor.putString(Constants.KEY_UID, userUid).apply();
+                        mSharedPreferencesEditor.commit();
                         String userInfo = authData.toString();
                         Log.d(TAG, "Currently logged in: " + userInfo);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);

@@ -105,6 +105,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
                             Log.d(TAG, "Currently logged in: " + userInfo);
 
                             mSharedPreferencesEditor.putString(Constants.KEY_UID, userUid).apply();
+                            mSharedPreferencesEditor.commit();
                             Intent intent = new Intent(NewUserActivity.this, NewMedicationActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
