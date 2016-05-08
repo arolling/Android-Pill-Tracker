@@ -32,6 +32,18 @@
             android:textSize="40sp"
             android:textColor="@color/colorAccent" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome user"
+            android:id="@+id/welcomeTextView"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/tvAppTitle"
+            android:layout_marginTop="75dp"
+            android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
     <!-- The navigation drawer -->
     <ListView android:id="@+id/navigation_drawer"

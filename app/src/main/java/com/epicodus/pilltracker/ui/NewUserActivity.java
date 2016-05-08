@@ -98,6 +98,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onAuthenticated(AuthData authData) {
                         mAuthProgressDialog.dismiss();
+                        mSharedPreferencesEditor.putString(Constants.KEY_USER_EMAIL, email).apply();
                         if (authData != null) {
                             String userUid = authData.getUid();
 
@@ -174,7 +175,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
             mPasswordEditText.setError("Please create a password containing at least 6 characters");
             return false;
         } else if (!password.equals(confirmPassword)){
-            mPasswordEditText.setError("Passwords do not match");
+            mConfirmPasswordEditText.setError("Passwords do not match");
             return false;
         }
         return true;

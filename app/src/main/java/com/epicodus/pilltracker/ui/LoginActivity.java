@@ -51,6 +51,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mNewUserButton.setOnClickListener(this);
 
+        String signupEmail = mSharedPreferences.getString(Constants.KEY_USER_EMAIL, null);
+        if (signupEmail != null) {
+            mEmailEditText.setText(signupEmail);
+        }
     }
 
     @Override
@@ -69,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void loginWithPassword() {
-        String email = mEmailEditText.getText().toString();
+        final String email = mEmailEditText.getText().toString();
         String password = mPasswordEditText.getText().toString();
         if(email.equals("")){
             mEmailEditText.setError("Please enter your email");
@@ -83,6 +87,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onAuthenticated(AuthData authData){
                     mAuthProgressDialog.dismiss();
+                    mSharedPreferencesEditor.putString(Constants.KEY_USER_EMAIL, email).apply();
                     if(authData != null){
                         String userUid = authData.getUid();
                         mSharedPreferencesEditor.putString(Constants.KEY_UID, userUid).apply();
@@ -105,7 +110,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             mEmailEditText.setError("Please check that you entered your email correctly");
                             break;
                         case FirebaseError.INVALID_PASSWORD:
-                            mEmailEditText.setError(firebaseError.getMessage());
+                            mPasswordEditText.setError(firebaseError.getMessage());
                             break;
                         case FirebaseError.NETWORK_ERROR:
                             showErrorToast("There was a problem with the network connection");
