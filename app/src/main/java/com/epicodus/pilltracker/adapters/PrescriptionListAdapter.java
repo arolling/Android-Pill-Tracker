@@ -1,28 +1,20 @@
 package com.epicodus.pilltracker.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.epicodus.pilltracker.R;
 import com.epicodus.pilltracker.models.Prescription;
-import com.epicodus.pilltracker.ui.PrescriptionDetailActivity;
-
-import org.parceler.Parcels;
 
 import java.util.ArrayList;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by abigailrolling on 5/1/16.
  */
-public class PrescriptionListAdapter extends RecyclerView.Adapter<PrescriptionListAdapter.PrescriptionViewHolder> {
+public class PrescriptionListAdapter extends RecyclerView.Adapter<PrescriptionViewHolder> {
     private Context mContext;
     private ArrayList<Prescription> mPrescriptions = new ArrayList<>();
 
@@ -32,14 +24,14 @@ public class PrescriptionListAdapter extends RecyclerView.Adapter<PrescriptionLi
     }
 
     @Override
-    public PrescriptionListAdapter.PrescriptionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PrescriptionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.prescription_list_item, parent, false);
-        PrescriptionViewHolder viewHolder = new PrescriptionViewHolder(view);
+        PrescriptionViewHolder viewHolder = new PrescriptionViewHolder(view, mPrescriptions);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(PrescriptionListAdapter.PrescriptionViewHolder holder, int position) {
+    public void onBindViewHolder(PrescriptionViewHolder holder, int position) {
         holder.bindPrescription(mPrescriptions.get(position));
     }
 
@@ -48,36 +40,5 @@ public class PrescriptionListAdapter extends RecyclerView.Adapter<PrescriptionLi
         return mPrescriptions.size();
     }
 
-    public class PrescriptionViewHolder extends RecyclerView.ViewHolder{
-        private Context mContext;
-        @Bind(R.id.brandNameTextView) TextView mBrandTextView;
-        @Bind(R.id.genericNameTextView) TextView mGenericTextView;
-        @Bind(R.id.dosagesTextView) TextView mDoseTextView;
-        @Bind(R.id.indicationTextView) TextView mIndicationTextView;
 
-        public PrescriptionViewHolder(View itemView){
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-            mContext = itemView.getContext();
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    int itemPosition = getLayoutPosition();
-                    Intent intent = new Intent(mContext, PrescriptionDetailActivity.class);
-                    intent.putExtra("position", itemPosition + "");
-                    intent.putExtra("prescriptions", Parcels.wrap(mPrescriptions));
-                    mContext.startActivity(intent);
-                }
-            });
-        }
-
-        public void bindPrescription(Prescription prescription){
-            mBrandTextView.setText(prescription.getBrandName());
-            mGenericTextView.setText(android.text.TextUtils.join(", ", prescription.getActiveIngredients()));
-            mDoseTextView.setText(prescription.getStrength());
-            mIndicationTextView.setText(prescription.getIndication());
-        }
-    }
 }

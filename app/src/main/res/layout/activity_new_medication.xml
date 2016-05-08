@@ -78,6 +78,8 @@
                 android:layout_below="@+id/drugNameEditText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_toLeftOf="@+id/drugSearchButton"
                 android:layout_toStartOf="@+id/drugSearchButton" />
 
@@ -87,6 +89,7 @@
                 android:textOff="Generic"
                 android:textOn="Brand"
                 android:showText="true"
+                android:layout_marginBottom="10dp"
                 android:id="@+id/brandGenericSwitch"
                 android:layout_below="@+id/drugNameEditText"
                 android:layout_alignRight="@+id/drugConfirmButton"
@@ -105,8 +108,6 @@
                 android:textColor="@color/colorIcons"
                 android:layout_below="@+id/brandGenericSwitch"
                 android:padding="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
@@ -114,6 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/drug_strength"
+                android:textSize="16sp"
                 android:id="@+id/strengthInstructions"
                 android:layout_below="@+id/drugConfirmButton"
                 android:layout_centerHorizontal="true" />
@@ -123,15 +125,15 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/drugStrengthSpinner"
                 android:layout_below="@+id/strengthInstructions"
-                android:dropDownWidth="match_parent"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_marginBottom="10dp"
+                android:dropDownWidth="match_parent" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/indicationEditText"
                 android:hint="@string/indication_hint"
+                android:layout_marginBottom="10dp"
                 android:layout_below="@id/drugStrengthSpinner"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -141,6 +143,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/sigEditText"
                 android:hint="@string/sig_hint"
+                android:layout_marginBottom="10dp"
                 android:layout_below="@id/indicationEditText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -150,6 +153,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/appearanceEditText"
                 android:hint="@string/appearance_hint"
+                android:layout_marginBottom="10dp"
                 android:layout_below="@id/sigEditText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -159,6 +163,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/frequencyEditText"
                 android:hint="@string/frequency_hint"
+                android:layout_marginBottom="10dp"
                 android:layout_below="@id/appearanceEditText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -169,6 +174,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/quantityEditText"
                 android:hint="@string/quantity_hint"
+                android:layout_marginBottom="10dp"
                 android:layout_below="@id/frequencyEditText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"

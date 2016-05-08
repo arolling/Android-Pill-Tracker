@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             String page = ((TextView)view).getText().toString();
             Toast.makeText(MainActivity.this, page, Toast.LENGTH_SHORT).show();
             switch (page){
-                case "Set Up New Medication":
+                case "Add New Medication":
                     Intent newMedIntent = new Intent(MainActivity.this, NewMedicationActivity.class);
                     startActivity(newMedIntent);
                     break;

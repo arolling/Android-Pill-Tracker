@@ -1,15 +1,21 @@
 package com.epicodus.pilltracker.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.epicodus.pilltracker.Constants;
 import com.epicodus.pilltracker.R;
+import com.epicodus.pilltracker.adapters.FirebasePrescriptionListAdapter;
 import com.epicodus.pilltracker.adapters.PrescriptionListAdapter;
 import com.epicodus.pilltracker.models.Prescription;
+import com.firebase.client.Firebase;
+import com.firebase.client.Query;
 
 import org.parceler.Parcels;
 
@@ -21,34 +27,11 @@ import butterknife.ButterKnife;
 public class PrescriptionListActivity extends AppCompatActivity {
     public static final String TAG = PrescriptionListActivity.class.getSimpleName();
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
-    private PrescriptionListAdapter mAdapter;
 
-    ArrayList<Prescription> mAllPrescriptions = new ArrayList<>();
-
-
-    private void setUpPrescriptions(){
-        ArrayList<String> rx1Ingredient = new ArrayList<>();
-        rx1Ingredient.add("atorvastatin calcium");
-        Prescription rx1 = new Prescription(rx1Ingredient, "Lipitor", "20mg", "Take one tablet daily at bedtime", 1.0, 1.0, "Cholesterol reduction", "Oval, white");
-        mAllPrescriptions.add(rx1);
-
-        ArrayList<String> rx2Ingredient = new ArrayList<>();
-        rx2Ingredient.add("olanzapine");
-        Prescription rx2 = new Prescription(rx2Ingredient, "Zyprexa", "5mg", "Take one tablet daily at bedtime", 1.0, 1.0, "Sleeping", "White, round");
-        mAllPrescriptions.add(rx2); // This is not medical advice and this drug should not be used for sleep
-
-        ArrayList<String> rx3Ingredient = new ArrayList<>();
-        rx3Ingredient.add("Brimonidine tartrate; timolol maleate");
-        Prescription rx3 = new Prescription(rx3Ingredient, "Combigan", "0.2%;0.5%", "Instil 1 drop in each eye once daily", 1.0, 1.0, "Glaucoma", "Clear eyedrop bottle");
-        mAllPrescriptions.add(rx3);
-
-        ArrayList<String> rx4Ingredient = new ArrayList<>();
-        rx4Ingredient.add("Hydrochlorothiazide; quinapril hydrochloride");
-        Prescription rx4 = new Prescription(rx4Ingredient, "Accuretic", "12.5MG;EQ 20MG BASE", "Take one tablet twice daily", 2.0, 1.0, "Blood pressure", "Maroon, football shaped");
-        mAllPrescriptions.add(rx4);
-
-
-    }
+    private Query mQuery;
+    private Firebase mFirebasePrescriptionsRef;
+    private FirebasePrescriptionListAdapter mAdapter;
+    private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +39,23 @@ public class PrescriptionListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_prescription_list);
         ButterKnife.bind(this);
 
-        setUpPrescriptions();
-        Intent intent = getIntent();
-        if(intent.getBundleExtra("args") != null){
-            Prescription newPrescription = Parcels.unwrap(intent.getBundleExtra("args").getParcelable("rx"));
-            mAllPrescriptions.add(newPrescription);
-        }
+        mFirebasePrescriptionsRef = new Firebase(Constants.FIREBASE_URL_PRESCRIPTIONS);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        mAdapter = new PrescriptionListAdapter(getApplicationContext(), mAllPrescriptions);
+        setUpFirebaseQuery();
+        setUpRecyclerView();
+    }
+
+    private void setUpFirebaseQuery() {
+        String userUid = mSharedPreferences.getString(Constants.KEY_UID, null);
+        String location = mFirebasePrescriptionsRef.child(userUid).toString();
+        mQuery = new Firebase(location);
+    }
+
+    private void setUpRecyclerView() {
+        mAdapter = new FirebasePrescriptionListAdapter(mQuery, Prescription.class);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PrescriptionListActivity.this);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setHasFixedSize(true);
     }
 
 
