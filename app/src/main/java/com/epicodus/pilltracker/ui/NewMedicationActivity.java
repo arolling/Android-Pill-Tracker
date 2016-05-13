@@ -34,7 +34,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class NewMedicationActivity extends AppCompatActivity implements View.OnClickListener {
+public class NewMedicationActivity extends BaseActivity implements View.OnClickListener {
     public static final String TAG = NewMedicationActivity.class.getSimpleName();
     private ArrayList<String> mUserInfo = new ArrayList<>();
     private ArrayList<String> mNameSuggestions = new ArrayList<>();
@@ -57,13 +57,12 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
     @Bind(R.id.frequencyEditText) TextView mFrequencyEditText;
     @Bind(R.id.appearanceEditText) TextView mAppearanceEditText;
 
-    private SharedPreferences mSharedPreferences;
     private ProgressDialog mAPICallProgressDialog;
 
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_medication);
         ButterKnife.bind(this);
@@ -80,7 +79,6 @@ public class NewMedicationActivity extends AppCompatActivity implements View.OnC
         mQuantityEditText.setVisibility(View.GONE);
         mAppearanceEditText.setVisibility(View.GONE);
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mBrandGenericSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mBrand = isChecked;

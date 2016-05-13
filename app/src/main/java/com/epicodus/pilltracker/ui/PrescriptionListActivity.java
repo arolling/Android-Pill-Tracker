@@ -24,23 +24,21 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PrescriptionListActivity extends AppCompatActivity {
+public class PrescriptionListActivity extends BaseActivity {
     public static final String TAG = PrescriptionListActivity.class.getSimpleName();
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
 
     private Query mQuery;
     private Firebase mFirebasePrescriptionsRef;
     private FirebasePrescriptionListAdapter mAdapter;
-    private SharedPreferences mSharedPreferences;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prescription_list);
         ButterKnife.bind(this);
 
         mFirebasePrescriptionsRef = new Firebase(Constants.FIREBASE_URL_PRESCRIPTIONS);
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         setUpFirebaseQuery();
         setUpRecyclerView();

@@ -30,7 +30,7 @@ import com.firebase.client.ValueEventListener;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
     private String[] mNavChoices;
     protected @Bind(R.id.drawer_layout) DrawerLayout mDrawerLayout;
@@ -38,25 +38,19 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-
-    private Firebase mFirebaseRef;
-
+    
     private ValueEventListener mUserRefListener;
     private Firebase mUserRef;
     private String mUId;
-    private SharedPreferences mSharedPreferences;
     @Bind(R.id.welcomeTextView)TextView mWelcomeTextView;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mUId = mSharedPreferences.getString(Constants.KEY_UID, null);
         mUserRef = new Firebase(Constants.FIREBASE_URL_USERS).child(mUId);
 

@@ -26,7 +26,7 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class NewUserActivity extends AppCompatActivity implements View.OnClickListener {
+public class NewUserActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = NewUserActivity.class.getSimpleName();
     @Bind(R.id.emailEditText) EditText mEmailEditText;
     @Bind(R.id.passwordEditText) EditText mPasswordEditText;
@@ -37,14 +37,12 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
     @Bind(R.id.etDoctorPhone) EditText mDoctorPhone;
     @Bind(R.id.etPharmacyName) EditText mPharmacyName;
     @Bind(R.id.etPharmacyPhone) EditText mPharmacyPhone;
-    private Firebase mFirebaseRef;
-    private SharedPreferences.Editor mSharedPreferencesEditor;
-    private SharedPreferences mSharedPreferences;
+
     private ProgressDialog mAuthProgressDialog;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
         ButterKnife.bind(this);
@@ -54,12 +52,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
         mAuthProgressDialog.setMessage("Authenticating with Firebase...");
         mAuthProgressDialog.setCancelable(false);
 
-        mFirebaseRef = new Firebase(Constants.FIREBASE_URL);
-
         mCreateNewAccountButton.setOnClickListener(this);
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mSharedPreferencesEditor = mSharedPreferences.edit();
     }
 
     @Override

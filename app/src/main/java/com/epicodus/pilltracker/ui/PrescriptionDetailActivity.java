@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PrescriptionDetailActivity extends AppCompatActivity {
+public class PrescriptionDetailActivity extends BaseActivity {
     @Bind(R.id.viewPager) ViewPager mViewPager;
     private PrescriptionPagerAdapter adapterViewPager;
     ArrayList<Prescription> mPrescriptions = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prescription_detail);
         ButterKnife.bind(this);
