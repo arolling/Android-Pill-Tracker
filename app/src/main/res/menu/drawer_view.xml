@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/homeDrawerItem"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/newMedicationDrawerItem"
+            android:icon="@drawable/ic_add_circle_outline_black_24dp"
+            android:title="@string/new_med" />
+        <item
+            android:id="@+id/myMedicationsDrawerItem"
+            android:icon="@drawable/ic_local_pharmacy_black_24dp"
+            android:title="@string/my_meds" />
+        <item
+            android:id="@+id/doctorViewDrawerItem"
+            android:icon="@drawable/ic_view_list_black_24dp"
+            android:title="@string/doctor_view" />
+        <item
+            android:id="@+id/contactDrawerItem"
+            android:icon="@drawable/ic_call_black_24dp"
+            android:title="@string/contact"/>
+    </group>
+</menu>

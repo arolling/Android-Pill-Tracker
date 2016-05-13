@@ -8,6 +8,11 @@
         <item>Update Refills</item>
         <item>Find Pharmacies</item>
     </string-array>
+    <string name="home">Home</string>
+    <string name="new_med">Add New Medication</string>
+    <string name="my_meds">My Medications</string>
+    <string name="doctor_view">For My Doctor</string>
+    <string name="contact">Contact My Provider</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
@@ -20,7 +25,4 @@
     <string name="quantity_hint">Number of pills per dose (average)</string>
     <string name="frequency_hint">Number of doses per day (average)</string>
     <string name="appearance_hint">Describe the pill\'s appearance</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
