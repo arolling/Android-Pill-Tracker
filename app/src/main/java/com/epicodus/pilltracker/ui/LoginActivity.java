@@ -37,6 +37,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        checkLoginStatus();
         mPasswordLoginButton.setOnClickListener(this);
 
         mAuthProgressDialog = new ProgressDialog(this);
@@ -120,6 +121,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void showErrorToast(String message) {
         Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
+    }
+
+    public void checkLoginStatus(){
+        AuthData authData = mFirebaseRef.getAuth();
+        Log.v(TAG, "Authdata: " + authData);
+        Log.v(TAG, "sharedpref: " + mSharedPreferences.getString(Constants.KEY_UID, null));
+        if(authData != null && authData.getUid().equals(mSharedPreferences.getString(Constants.KEY_UID, null))){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
     }
 
 }

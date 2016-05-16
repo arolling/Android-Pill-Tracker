@@ -11,21 +11,30 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.epicodus.pilltracker.Constants;
 import com.epicodus.pilltracker.R;
+import com.epicodus.pilltracker.models.User;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 public class BaseActivity extends AppCompatActivity {
     public Firebase mFirebaseRef;
     public SharedPreferences mSharedPreferences;
     public SharedPreferences.Editor mSharedPreferencesEditor;
     public ActionBarDrawerToggle drawerToggle;
+
+    public Firebase mUserRef;
+    public String mUId;
 
     protected DrawerLayout mDrawer;
     protected Toolbar toolbar;
@@ -49,10 +58,29 @@ public class BaseActivity extends AppCompatActivity {
 
         drawerToggle = setupDrawerToggle();
 
-        // Tie DrawerLayout events to the ActionBarToggle
         mDrawer.addDrawerListener(drawerToggle);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
+        View headerLayout = nvDrawer.inflateHeaderView(R.layout.nav_header);
+        final TextView headerText = (TextView) headerLayout.findViewById(R.id.drawerHeaderTextView);
+
+        mUId = mSharedPreferences.getString(Constants.KEY_UID, null);
+        mUserRef = new Firebase(Constants.FIREBASE_URL_USERS).child(mUId);
+
+       mUserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                headerText.setText(user.getName());
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.d(this.getClass().getSimpleName(), "Read failed");
+            }
+        });
+
+
     }
 
     protected void replaceContentLayout(int sourceId, int destinationId) {
@@ -75,7 +103,6 @@ public class BaseActivity extends AppCompatActivity {
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        // The action bar home/up action should open or close the drawer.
         switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawer.openDrawer(GravityCompat.START);
@@ -90,8 +117,7 @@ public class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // `onPostCreate` called when activity start-up is complete after `onStart()`
-    // NOTE! Make sure to override the method with only a single `Bundle` argument
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);

@@ -36,8 +36,7 @@ public class MainActivity extends BaseActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
 
     private ValueEventListener mUserRefListener;
-    private Firebase mUserRef;
-    private String mUId;
+
     @Bind(R.id.welcomeTextView)TextView mWelcomeTextView;
 
 
