@@ -66,10 +66,8 @@ public class NewMedicationActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LayoutInflater inflater = (LayoutInflater) this
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View contentView = inflater.inflate(R.layout.activity_new_medication, null, false);
-        mDrawer.addView(contentView, 0);
+        super.replaceContentLayout(R.layout.activity_new_medication, R.id.flContent);
+
         ButterKnife.bind(this);
 
         mDrugConfirmButton.setVisibility(View.GONE);

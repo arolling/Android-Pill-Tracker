@@ -44,11 +44,8 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        super.replaceContentLayout(R.layout.activity_main, R.id.flContent);
 
-        LayoutInflater inflater = (LayoutInflater) this
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View contentView = inflater.inflate(R.layout.activity_main, null, false);
-        mDrawer.addView(contentView, 0);
 
         ButterKnife.bind(this);
         mUId = mSharedPreferences.getString(Constants.KEY_UID, null);

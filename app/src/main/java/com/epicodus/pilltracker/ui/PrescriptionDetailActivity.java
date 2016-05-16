@@ -1,8 +1,11 @@
 package com.epicodus.pilltracker.ui;
 
+import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.epicodus.pilltracker.R;
 import com.epicodus.pilltracker.adapters.PrescriptionPagerAdapter;
@@ -23,7 +26,7 @@ public class PrescriptionDetailActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prescription_detail);
+        super.replaceContentLayout(R.layout.activity_prescription_detail, R.id.flContent);
         ButterKnife.bind(this);
 
         mPrescriptions = Parcels.unwrap(getIntent().getParcelableExtra("prescriptions"));

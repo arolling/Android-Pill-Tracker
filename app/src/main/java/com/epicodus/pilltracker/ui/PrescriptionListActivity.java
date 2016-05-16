@@ -1,5 +1,6 @@
 package com.epicodus.pilltracker.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.epicodus.pilltracker.Constants;
 import com.epicodus.pilltracker.R;
@@ -35,7 +38,8 @@ public class PrescriptionListActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prescription_list);
+        super.replaceContentLayout(R.layout.activity_prescription_list, R.id.flContent);
+
         ButterKnife.bind(this);
 
         mFirebasePrescriptionsRef = new Firebase(Constants.FIREBASE_URL_PRESCRIPTIONS);

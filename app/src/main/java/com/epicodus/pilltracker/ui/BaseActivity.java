@@ -13,6 +13,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.epicodus.pilltracker.Constants;
 import com.epicodus.pilltracker.R;
@@ -27,6 +30,7 @@ public class BaseActivity extends AppCompatActivity {
     protected DrawerLayout mDrawer;
     protected Toolbar toolbar;
     protected NavigationView nvDrawer;
+    public FrameLayout mContentFrame;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,7 @@ public class BaseActivity extends AppCompatActivity {
         // Set a Toolbar to replace the ActionBar.
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mContentFrame = (FrameLayout) findViewById(R.id.flContent);
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -48,6 +53,17 @@ public class BaseActivity extends AppCompatActivity {
         mDrawer.addDrawerListener(drawerToggle);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
+    }
+
+    protected void replaceContentLayout(int sourceId, int destinationId) {
+        View contentLayout = findViewById(destinationId);
+
+        ViewGroup parent = (ViewGroup) contentLayout.getParent();
+        int index = parent.indexOfChild(contentLayout);
+
+        parent.removeView(contentLayout);
+        contentLayout = getLayoutInflater().inflate(sourceId, parent, false);
+        parent.addView(contentLayout, index);
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
