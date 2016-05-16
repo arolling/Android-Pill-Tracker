@@ -67,20 +67,23 @@ public class BaseActivity extends AppCompatActivity {
         final TextView headerText = (TextView) headerLayout.findViewById(R.id.drawerHeaderTextView);
 
         mUId = mSharedPreferences.getString(Constants.KEY_UID, null);
-        mUserRef = new Firebase(Constants.FIREBASE_URL_USERS).child(mUId);
+        if(mUId != null){
+            mUserRef = new Firebase(Constants.FIREBASE_URL_USERS).child(mUId);
 
-        mUserRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mUser = dataSnapshot.getValue(User.class);
-                headerText.setText(mUser.getName());
-            }
+            mUserRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    mUser = dataSnapshot.getValue(User.class);
+                    headerText.setText(mUser.getName());
+                }
 
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                Log.d(this.getClass().getSimpleName(), "Read failed");
-            }
-        });
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+                    Log.d(this.getClass().getSimpleName(), "Read failed");
+                }
+            });
+        }
+
 
 
     }

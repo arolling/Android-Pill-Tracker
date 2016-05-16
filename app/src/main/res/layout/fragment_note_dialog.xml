@@ -12,7 +12,7 @@
 
     <EditText
         android:id="@+id/addNoteEditText"
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
         android:imeOptions="actionDone"

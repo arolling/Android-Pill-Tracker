@@ -44,8 +44,6 @@ public class Prescription {
         this.qtyPerDose = pillsPerDose;
         this.indication = indication;
         this.appearance = appearance;
-//        this.questions = new ArrayList<>();
-//        this.notes = new ArrayList<>();
         this.dailyUsage = frequency * pillsPerDose;
     }
 
