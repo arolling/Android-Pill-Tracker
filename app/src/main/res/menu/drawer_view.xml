@@ -17,9 +17,21 @@
             android:id="@+id/doctorViewDrawerItem"
             android:icon="@drawable/ic_view_list_black_24dp"
             android:title="@string/doctor_view" />
-        <item
-            android:id="@+id/contactDrawerItem"
-            android:icon="@drawable/ic_call_black_24dp"
-            android:title="@string/contact"/>
+
+        <item android:title="@string/contact"
+            android:id="@+id/contactDrawerItem">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:icon="@drawable/ic_call_black_24dp"
+                        android:id="@+id/callDoctorDrawerItem"
+                        android:title="Call Doctor" />
+                    <item
+                        android:icon="@drawable/ic_call_black_24dp"
+                        android:id="@+id/callPharmacyDrawerItem"
+                        android:title="Call Pharmacy" />
+                </group>
+            </menu>
+        </item>
     </group>
 </menu>

@@ -3,6 +3,7 @@ package com.epicodus.pilltracker.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -35,6 +36,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public Firebase mUserRef;
     public String mUId;
+    public User mUser;
 
     protected DrawerLayout mDrawer;
     protected Toolbar toolbar;
@@ -67,11 +69,11 @@ public class BaseActivity extends AppCompatActivity {
         mUId = mSharedPreferences.getString(Constants.KEY_UID, null);
         mUserRef = new Firebase(Constants.FIREBASE_URL_USERS).child(mUId);
 
-       mUserRef.addValueEventListener(new ValueEventListener() {
+        mUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                headerText.setText(user.getName());
+                mUser = dataSnapshot.getValue(User.class);
+                headerText.setText(mUser.getName());
             }
 
             @Override
@@ -155,6 +157,16 @@ public class BaseActivity extends AppCompatActivity {
             case R.id.homeDrawerItem:
                 Intent homeIntent = new Intent(this, MainActivity.class);
                 startActivity(homeIntent);
+                break;
+            case R.id.callDoctorDrawerItem:
+                Intent phoneDoctorIntent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:" + mUser.getDoctorPhone()));
+                startActivity(phoneDoctorIntent);
+                break;
+            case R.id.callPharmacyDrawerItem:
+                Intent phonePharmacyIntent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:" + mUser.getPharmacyPhone()));
+                startActivity(phonePharmacyIntent);
                 break;
             default:
                 break;
