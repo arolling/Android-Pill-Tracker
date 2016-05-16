@@ -21,7 +21,6 @@ import butterknife.ButterKnife;
 
 
 public class NoteDialogFragment extends DialogFragment implements TextView.OnEditorActionListener {
-    @Bind(R.id.dialogFragmentTitle) TextView mDialogTitleTextView;
     @Bind(R.id.addNoteEditText) EditText mAddNoteEditText;
 
     public interface NoteDialogListener {
@@ -56,9 +55,6 @@ public class NoteDialogFragment extends DialogFragment implements TextView.OnEdi
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-
-
-        // Show soft keyboard automatically and request focus to field
         mAddNoteEditText.requestFocus();
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         mAddNoteEditText.setOnEditorActionListener(this);
@@ -73,11 +69,6 @@ public class NoteDialogFragment extends DialogFragment implements TextView.OnEdi
             return true;
         }
         return false;
-    }
-
-    public void sendBackResult() {
-        // Notice the use of `getTargetFragment` which will be set when the dialog is displayed
-
     }
 
 }

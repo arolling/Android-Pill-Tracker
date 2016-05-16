@@ -7,21 +7,16 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context="com.epicodus.pilltracker.ui.NoteDialogFragment">
-
-    <TextView
-        android:id="@+id/dialogFragmentTitle"
-        android:text="Add Question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@color/colorAccent" />
+    tools:context="com.epicodus.pilltracker.ui.NoteDialogFragment"
+    android:padding="12dp">
 
     <EditText
         android:id="@+id/addNoteEditText"
-        android:layout_width="250dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:imeOptions="actionDone" />
+        android:imeOptions="actionDone"
+        android:minHeight="100dp"
+        android:lines="5" />
 </LinearLayout>
 

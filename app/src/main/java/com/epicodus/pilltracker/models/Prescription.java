@@ -27,8 +27,8 @@ public class Prescription {
     public Date firstPrescribed;
     public double currentOnhand;
     public Date dateOfCurrentOnhand;
-    public List<String> questions; //for doctor or pharmacist
-    public List<String> notes; //side effects, worries
+    public List<String> questions = new ArrayList<>();; //for doctor or pharmacist
+    public List<String> notes = new ArrayList<>();; //side effects, worries
     public String pushId;
 
     public Prescription(){
@@ -44,8 +44,8 @@ public class Prescription {
         this.qtyPerDose = pillsPerDose;
         this.indication = indication;
         this.appearance = appearance;
-        this.questions = new ArrayList<>();
-        this.notes = new ArrayList<>();
+//        this.questions = new ArrayList<>();
+//        this.notes = new ArrayList<>();
         this.dailyUsage = frequency * pillsPerDose;
     }
 

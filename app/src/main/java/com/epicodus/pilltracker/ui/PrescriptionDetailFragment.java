@@ -2,6 +2,7 @@ package com.epicodus.pilltracker.ui;
 
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,6 +39,7 @@ public class PrescriptionDetailFragment extends BaseFragment implements View.OnC
     @Bind(R.id.notesRecyclerView) RecyclerView mNotesRecyclerView;
     @Bind(R.id.addQuestionButton) Button mAddQuestionButton;
     @Bind(R.id.addNoteButton) Button mAddNoteButton;
+    private boolean mQuestion; //true if question, false if note
 
     private Prescription mPrescription;
 
@@ -86,9 +88,11 @@ public class PrescriptionDetailFragment extends BaseFragment implements View.OnC
     public void onClick(View v){
         switch (v.getId()){
             case R.id.addQuestionButton:
+                mQuestion = true;
                 showAddQuestionDialog();
                 break;
             case R.id.addNoteButton:
+                mQuestion = false;
                 //todo: add note logic here
                 break;
             default:
@@ -99,13 +103,18 @@ public class PrescriptionDetailFragment extends BaseFragment implements View.OnC
     private void showAddQuestionDialog() {
         FragmentManager fm = getChildFragmentManager();
         NoteDialogFragment noteDialogFragment = NoteDialogFragment.newInstance("Add a Question");
+        noteDialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
         noteDialogFragment.setTargetFragment(PrescriptionDetailFragment.this, 300);
         noteDialogFragment.show(fm, "fragment_note_dialog");
     }
 
     @Override
     public void onFinishEditDialog(String inputText) {
-        Toast.makeText(getActivity(), "Hi, " + inputText, Toast.LENGTH_SHORT).show();
+        if(mQuestion){
+            addNewQuestion(inputText);
+        } else {
+            //addNewNote(inputText);
+        }
     }
 
     public void addNewQuestion(String newQuestion){
@@ -113,9 +122,9 @@ public class PrescriptionDetailFragment extends BaseFragment implements View.OnC
                 .child(mUid)
                 .child(mPrescription.getPushId())
                 .child("questions");
-        List<String> currentQuestions = mPrescription.getQuestions();
-        currentQuestions.add(newQuestion);
-        prescriptionRef.setValue(currentQuestions);
+        mPrescription.addQuestion(newQuestion);
+        prescriptionRef.setValue(mPrescription.getQuestions());
+        Toast.makeText(getActivity(), "Saved new question", Toast.LENGTH_SHORT).show();
     }
 
 }

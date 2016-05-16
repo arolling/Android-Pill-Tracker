@@ -18,9 +18,9 @@
         android:textStyle="bold"
         android:textSize="40sp"
         android:textColor="@color/colorAccent"
+        android:layout_marginTop="37dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="89dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,8 +30,8 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="28sp"
         android:textStyle="bold"
+        android:layout_marginTop="129dp"
         android:layout_below="@+id/tvAppTitle"
-        android:layout_marginTop="75dp"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
