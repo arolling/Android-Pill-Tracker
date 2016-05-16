@@ -121,20 +121,22 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
-            android:id="@+id/dosingDetailLayout"
+            android:id="@+id/concernsLayout"
             android:orientation="horizontal">
 
             <android.support.v7.widget.RecyclerView
                 android:layout_height="150dp"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-                android:id="@+id/questionsRecyclerView"/>
+                android:id="@+id/questionsRecyclerView"
+                android:layout_margin="10dp" />
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_weight="0.5"
-                android:id="@+id/notesRecyclerView"/>
+                android:id="@+id/notesRecyclerView"
+                android:layout_margin="10dp" />
 
 
         </LinearLayout>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.epicodus.pilltracker.Constants;
 import com.epicodus.pilltracker.R;
+import com.epicodus.pilltracker.adapters.ConcernListAdapter;
 import com.epicodus.pilltracker.models.Prescription;
 import com.firebase.client.Firebase;
 
@@ -42,6 +44,8 @@ public class PrescriptionDetailFragment extends BaseFragment implements View.OnC
     private boolean mQuestion; //true if question, false if note
 
     private Prescription mPrescription;
+    private ConcernListAdapter mQuestionAdapter;
+    private ConcernListAdapter mNoteAdapter;
 
 
     public PrescriptionDetailFragment() {
@@ -81,6 +85,18 @@ public class PrescriptionDetailFragment extends BaseFragment implements View.OnC
         mAddNoteButton.setOnClickListener(this);
         mAddQuestionButton.setOnClickListener(this);
 
+        mQuestionAdapter = new ConcernListAdapter(getActivity(), mPrescription.getQuestions());
+        mQuestionsRecyclerView.setAdapter(mQuestionAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        mQuestionsRecyclerView.setLayoutManager(layoutManager);
+        mQuestionsRecyclerView.setHasFixedSize(true);
+
+        mNoteAdapter = new ConcernListAdapter(getActivity(), mPrescription.getNotes());
+        mNotesRecyclerView.setAdapter(mNoteAdapter);
+        RecyclerView.LayoutManager noteLayoutManager = new LinearLayoutManager(getActivity());
+        mNotesRecyclerView.setLayoutManager(noteLayoutManager);
+        mNotesRecyclerView.setHasFixedSize(true);
+
         return view;
     }
 
@@ -93,7 +109,7 @@ public class PrescriptionDetailFragment extends BaseFragment implements View.OnC
                 break;
             case R.id.addNoteButton:
                 mQuestion = false;
-                //todo: add note logic here
+                showAddNoteDialog();
                 break;
             default:
                 break;
@@ -108,12 +124,20 @@ public class PrescriptionDetailFragment extends BaseFragment implements View.OnC
         noteDialogFragment.show(fm, "fragment_note_dialog");
     }
 
+    private void showAddNoteDialog() {
+        FragmentManager fm = getChildFragmentManager();
+        NoteDialogFragment noteDialogFragment = NoteDialogFragment.newInstance("Add a Note");
+        noteDialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
+        noteDialogFragment.setTargetFragment(PrescriptionDetailFragment.this, 300);
+        noteDialogFragment.show(fm, "fragment_note_dialog");
+    }
+
     @Override
     public void onFinishEditDialog(String inputText) {
         if(mQuestion){
             addNewQuestion(inputText);
         } else {
-            //addNewNote(inputText);
+            addNewNote(inputText);
         }
     }
 
@@ -125,6 +149,16 @@ public class PrescriptionDetailFragment extends BaseFragment implements View.OnC
         mPrescription.addQuestion(newQuestion);
         prescriptionRef.setValue(mPrescription.getQuestions());
         Toast.makeText(getActivity(), "Saved new question", Toast.LENGTH_SHORT).show();
+    }
+
+    public void addNewNote(String newNote){
+        Firebase prescriptionRef = new Firebase(Constants.FIREBASE_URL_PRESCRIPTIONS)
+                .child(mUid)
+                .child(mPrescription.getPushId())
+                .child("notes");
+        mPrescription.addNote(newNote);
+        prescriptionRef.setValue(mPrescription.getNotes());
+        Toast.makeText(getActivity(), "Saved new note", Toast.LENGTH_SHORT).show();
     }
 
 }
