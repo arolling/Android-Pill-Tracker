@@ -175,8 +175,9 @@ public class BaseActivity extends AppCompatActivity {
         return true;
     }
 
-    protected void logout() {
+    public void logout() {
         mFirebaseRef.unauth();
+        mSharedPreferencesEditor.remove(Constants.KEY_UID).commit();
         takeUserToLoginScreenOnUnAuth();
     }
 

@@ -1,0 +1,27 @@
+
+<!-- fragment_edit_name.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addNoteDialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context="com.epicodus.pilltracker.ui.NoteDialogFragment">
+
+    <TextView
+        android:id="@+id/dialogFragmentTitle"
+        android:text="Add Question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/colorAccent" />
+
+    <EditText
+        android:id="@+id/addNoteEditText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:imeOptions="actionDone" />
+</LinearLayout>
+

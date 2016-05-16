@@ -3,25 +3,29 @@ package com.epicodus.pilltracker.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.epicodus.pilltracker.Constants;
 import com.epicodus.pilltracker.R;
 import com.epicodus.pilltracker.models.Prescription;
+import com.firebase.client.Firebase;
 
 import org.parceler.Parcels;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class PrescriptionDetailFragment extends Fragment implements View.OnClickListener{
+
+public class PrescriptionDetailFragment extends BaseFragment implements View.OnClickListener, NoteDialogFragment.NoteDialogListener{
     @Bind(R.id.brandDetailTextView) TextView mBrandDetailTextView;
     @Bind(R.id.genericDetailTextView) TextView mGenericDetailTextView;
     @Bind(R.id.strengthDetailTextView) TextView mStrengthDetailTextView;
@@ -82,7 +86,7 @@ public class PrescriptionDetailFragment extends Fragment implements View.OnClick
     public void onClick(View v){
         switch (v.getId()){
             case R.id.addQuestionButton:
-                //todo: add question logic here
+                showAddQuestionDialog();
                 break;
             case R.id.addNoteButton:
                 //todo: add note logic here
@@ -90,6 +94,28 @@ public class PrescriptionDetailFragment extends Fragment implements View.OnClick
             default:
                 break;
         }
+    }
+
+    private void showAddQuestionDialog() {
+        FragmentManager fm = getChildFragmentManager();
+        NoteDialogFragment noteDialogFragment = NoteDialogFragment.newInstance("Add a Question");
+        noteDialogFragment.setTargetFragment(PrescriptionDetailFragment.this, 300);
+        noteDialogFragment.show(fm, "fragment_note_dialog");
+    }
+
+    @Override
+    public void onFinishEditDialog(String inputText) {
+        Toast.makeText(getActivity(), "Hi, " + inputText, Toast.LENGTH_SHORT).show();
+    }
+
+    public void addNewQuestion(String newQuestion){
+        Firebase prescriptionRef = new Firebase(Constants.FIREBASE_URL_PRESCRIPTIONS)
+                .child(mUid)
+                .child(mPrescription.getPushId())
+                .child("questions");
+        List<String> currentQuestions = mPrescription.getQuestions();
+        currentQuestions.add(newQuestion);
+        prescriptionRef.setValue(currentQuestions);
     }
 
 }

@@ -25,4 +25,7 @@
     <string name="quantity_hint">Number of pills per dose (average)</string>
     <string name="frequency_hint">Number of doses per day (average)</string>
     <string name="appearance_hint">Describe the pill\'s appearance</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
